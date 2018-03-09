@@ -1,0 +1,12 @@
+@import 'vendor/normalize';
+
+@import 'base/resets';
+@import 'base/variables';
+@import 'base/typography';
+
+@import 'layouts/default';
+
+@import 'components/header';
+@import 'components/footer';
+
+@import 'layouts/homepage';

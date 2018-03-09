@@ -1,0 +1,39 @@
+footer {
+  border-top: 1px solid black;
+  padding: $base-unit 0;
+
+  & > * {
+    margin: 0;
+  }
+  nav {
+    grid-column: 2 / span 2;
+    display: block;
+    a {
+      display: inline-block;
+      padding-right: $base-unit;
+    }
+  }
+  p {
+    grid-column: 4 / span 3;
+    display: block;
+    text-align: right;
+  }
+}
+
+@media (max-width: $media-toggle) {
+  footer {
+    & > nav, & > p {
+      grid-column: main;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      a {
+        padding: 0 $base-unit/2;
+      }
+    }
+    p {
+      text-align: center;
+    }
+  }
+}

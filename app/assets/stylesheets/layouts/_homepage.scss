@@ -1,0 +1,17 @@
+main.home {
+  ul {
+    padding: 0;
+    list-style: none;
+
+    li {
+      font-family: $font-family-header;
+      font-weight: 400;
+      font-size: 1.4 * $base-unit;
+      line-height: 2 * $base-unit;
+      
+      &:last-of-type {
+        margin-top: $base-unit;
+      }
+    }
+  }
+}

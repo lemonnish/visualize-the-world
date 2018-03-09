@@ -1,0 +1,37 @@
+body {
+  display: grid;
+  grid-template-columns:
+    [full-start] minmax($base-unit, 1fr)
+    [main-start] repeat(4, minmax(0, $content-width/5)) $content-width/5
+    [main-end] minmax($base-unit, 1fr) [full-end];
+  grid-column-gap: 0;
+
+  & > footer, & > header, & > div.development {
+    display: grid;
+    grid-template-columns: inherit;
+    grid-column-gap: inherit;
+    grid-column: full;
+
+    & > * {
+      grid-column: main;
+    }
+  }
+
+  & > * {
+    grid-column: main;
+  }
+
+  main {
+    padding: $base-unit * 3 0;
+    & :first-child {
+      margin-top: 0;
+    }
+    & :last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+
+div.development {
+  border-top: 2 * $base-unit solid lightgrey;
+}
