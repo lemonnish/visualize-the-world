@@ -1,0 +1,23 @@
+form {
+  display: grid;
+  grid-template-columns: 1fr
+    [label-start] minmax(0, 200px)
+    [label-end input-start] minmax(0, 400px)
+    [input-end] 1fr;
+  grid-column-gap: $base-unit;
+  grid-row-gap: $base-unit / 2;
+  & > * {
+    display: block;
+  }
+  label {
+    grid-column: label;
+    text-align: right;
+  }
+  input {
+    grid-column: input;
+    &:last-child {
+      margin-top: $base-unit;
+      grid-column: 2 / span 2;
+    }
+  }
+}
