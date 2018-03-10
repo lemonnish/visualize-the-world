@@ -8,7 +8,15 @@ class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.
   fixtures :all
 
-  # Add more helper methods to be used by all tests here...
+  # Check if there is a user logged in
+  def logged_in?
+    !session[:user_id].nil?
+  end
+
+  # Log in as a particular user
+  def log_in_as(user)
+    session[:user_id] = user.id
+  end
 
   # Return the page title
   def full_title_t(page_title = '')
