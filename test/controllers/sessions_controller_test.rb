@@ -5,6 +5,7 @@ class SessionsControllerTest < ActionDispatch::IntegrationTest
     get login_path
     assert_response :success
     assert_select "title", full_title_t("Log in")
+    assert_select "a[href=?]", signup_path
   end
 
 end

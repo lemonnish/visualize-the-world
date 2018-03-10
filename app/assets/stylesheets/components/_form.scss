@@ -1,7 +1,8 @@
 form {
   justify-content: center;
   display: grid;
-  grid-template-columns: minmax(0, 200px) minmax(0, 400px);
+  grid-template-columns: [full-start]
+    minmax(0, 200px) minmax(0, 400px) [full-end];
   grid-column-gap: $base-unit;
   grid-row-gap: $base-unit / 2;
 
@@ -19,6 +20,11 @@ form {
   & > input:last-of-type {
     margin-top: $base-unit;
     padding: $base-unit / 2;
-    grid-column: 1 / span 2;
+    grid-column: full;
+  }
+
+  p {
+    margin: $base-unit / 2 0;
+    grid-column: full;
   }
 }
