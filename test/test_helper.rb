@@ -9,4 +9,14 @@ class ActiveSupport::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
+
+  # Return the page title
+  def full_title_t(page_title = '')
+    base_title = "Visualize the World"
+    if page_title.empty?
+      base_title
+    else
+      "#{ page_title } | #{ base_title }"
+    end
+  end
 end
