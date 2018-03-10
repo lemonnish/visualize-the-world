@@ -21,22 +21,4 @@ form {
     padding: $base-unit / 2;
     grid-column: 1 / span 2;
   }
-  div#error_explanation {
-    text-align: left;
-    grid-column: 1 / span 2;
-    border: 2px solid $color-warning;
-    border-radius: 5px;
-    padding: $base-unit;
-    margin-bottom: $base-unit;
-    p {
-      margin: 0 0 $base-unit / 2;
-    }
-    ul {
-      margin: 0;
-    }
-  }
-  div.field_with_errors > input {
-    border: 1px solid $color-warning;
-    color: $color-warning;
-  }
 }
