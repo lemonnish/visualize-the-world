@@ -1,23 +1,42 @@
 form {
+  justify-content: center;
   display: grid;
-  grid-template-columns: 1fr
-    [label-start] minmax(0, 200px)
-    [label-end input-start] minmax(0, 400px)
-    [input-end] 1fr;
+  grid-template-columns: minmax(0, 200px) minmax(0, 400px);
   grid-column-gap: $base-unit;
   grid-row-gap: $base-unit / 2;
-  & > * {
+
+  & > *, div.field_with_errors > * {
     display: block;
   }
   label {
-    grid-column: label;
     text-align: right;
   }
   input {
-    grid-column: input;
-    &:last-child {
-      margin-top: $base-unit;
-      grid-column: 2 / span 2;
+    width: 100%;
+    padding: 0 $base-unit / 4;
+  }
+
+  & > input:last-of-type {
+    margin-top: $base-unit;
+    padding: $base-unit / 2;
+    grid-column: 1 / span 2;
+  }
+  div#error_explanation {
+    text-align: left;
+    grid-column: 1 / span 2;
+    border: 2px solid $color-warning;
+    border-radius: 5px;
+    padding: $base-unit;
+    margin-bottom: $base-unit;
+    p {
+      margin: 0 0 $base-unit / 2;
     }
+    ul {
+      margin: 0;
+    }
+  }
+  div.field_with_errors > input {
+    border: 1px solid $color-warning;
+    color: $color-warning;
   }
 }
