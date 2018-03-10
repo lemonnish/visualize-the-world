@@ -19,7 +19,7 @@ class UserLoginTest < ActionDispatch::IntegrationTest
     assert flash.empty?
   end
 
-  test "should log in" do
+  test "should log in then log out" do
     get login_path
     post login_path, params: { session: { email: @user.email,
                                           password: 'password' } }
@@ -27,5 +27,9 @@ class UserLoginTest < ActionDispatch::IntegrationTest
     assert_redirected_to root_path
     follow_redirect!
     assert_template 'static_pages/home'
+
+    delete logout_path
+    assert_not logged_in?
+    assert_redirected_to root_path
   end
 end
