@@ -26,5 +26,6 @@ class SignupTest < ActionDispatch::IntegrationTest
     follow_redirect!
     assert_template 'static_pages/home'
     assert_not flash.empty?
+    assert logged_in?
   end
 end
