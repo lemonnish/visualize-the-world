@@ -1,3 +1,7 @@
-<% provide(:title, "Map") %>
+<% provide(:title, @map.title) %>
 
-<h1>My map name here</h1>
+<h1><%= @map.title %></h1>
+
+<% if current_user?(@map.user) %>
+  <%= link_to "Edit map", edit_map_path %>
+<% end %>

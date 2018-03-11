@@ -36,4 +36,9 @@ class ActionDispatch::IntegrationTest
     post login_path, params: { session: { email: user.email,
                                           password: password } }
   end
+
+  # Log out current user
+  def log_out
+    delete logout_path
+  end
 end

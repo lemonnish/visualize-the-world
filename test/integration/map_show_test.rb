@@ -14,13 +14,13 @@ class MapShowTest < ActionDispatch::IntegrationTest
     assert_template 'maps/show'
     assert_select 'a[href=?]', edit_map_path, count: 0
     assert_select "title", full_title_t(@map.title)
-    assert_select "h1", full_title_t(@map.title)
+    assert_select "body h1", @map.title
 
     log_in_as @other_user
     get map_path(@map)
     assert_template 'maps/show'
     assert_select 'a[href=?]', edit_map_path, count: 0
-    logout
+    log_out
 
     log_in_as @user
     get map_path(@map)

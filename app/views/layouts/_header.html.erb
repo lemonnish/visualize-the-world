@@ -6,7 +6,7 @@
         <input type='checkbox' id='toggle-account'>
         <label for='toggle-account'>Account</label>
         <div class='dropdown-content'>
-          <%= link_to "Manage my maps", '#' %>
+          <%= link_to "Manage my maps", maps_path %>
           <%= link_to "Account settings", user_path %>
           <%= link_to "Log out", logout_path, method: 'delete' %>
         </div>

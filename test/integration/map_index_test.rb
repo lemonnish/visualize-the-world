@@ -13,7 +13,7 @@ class MapIndexTest < ActionDispatch::IntegrationTest
     get maps_path
     assert_template 'maps/index'
     @user.maps.each do |map|
-      assert_match "a[href=?]", map_path(map), count: 0
+      assert_select "a[href=?]", map_path(map), count: 0
     end
   end
 
@@ -22,7 +22,7 @@ class MapIndexTest < ActionDispatch::IntegrationTest
     assert_redirected_to root_path
     get maps_path
     @user.maps.each do |map|
-      assert_match "a[href=?]", map_path(map)
+      assert_select "a[href=?]", map_path(map)
     end
   end
 end

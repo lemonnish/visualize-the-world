@@ -1,3 +1,25 @@
 <% provide(:title, "Manage my maps") %>
 
 <h1>Manage my maps</h1>
+
+<% if @maps.count == 0 %>
+  <p>
+    You currently have no maps.
+    <%= link_to "Create a map here!", new_map_path %>
+  </p>
+<% else %>
+  <table>
+    <tr>
+      <th>Title</th><th></th><th>Share Settings</th><th></th>
+    </tr>
+  <% @maps.each do |map| %>
+    <tr>
+      <td><%= link_to map.title, map_path(map) %></td>
+      <td><%= link_to "edit", edit_map_path(map) %></td>
+      <td><%= map.public? ? "Publicly visible" : "Private" %></td>
+      <td><%= link_to "delete", map_path(map), method: :delete,
+                                data: { confirm: "You sure?" } %></td>
+    </tr>
+  <% end %>
+  </table>
+<% end %>
