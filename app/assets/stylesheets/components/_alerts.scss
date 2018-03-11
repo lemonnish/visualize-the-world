@@ -4,6 +4,10 @@ div.alert {
   padding: $base-unit;
 }
 
+div.alert-danger {
+  border-color: $color-warning;
+}
+
 div#error_explanation {
   text-align: left;
   grid-column: 1 / span 2;

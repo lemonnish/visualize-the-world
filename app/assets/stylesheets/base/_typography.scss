@@ -33,6 +33,18 @@ ul, ol {
   }
 }
 
+a {
+  &:link {
+    color: $color-link;
+  }
+  &:visited {
+    color: $color-link;
+  }
+  &:hover, &:active {
+    color: $color-link-hover;
+  }
+}
+
 pre {
   border: 1px solid grey;
   padding: .5rem 1rem;

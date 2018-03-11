@@ -1,17 +1,33 @@
+// Color variable names
+$red: #b71c1c;
+$yellow: #ffc107;
+$pale-yellow: #ffecb3;
+$dark-yellow: #FF8E00;
+$blue: #1976d2;
+$light-blue: #4fc3f7;
+
+// Basic dimensions
 $content-width: 900px;
-
 $base-unit: 1rem;
+$media-toggle: 700px;
 
+// Colors
 $color-base-text: black;
-$color-link: blue;
-$color-link-hover: darkblue;
-$color-link-visited: purple;
 
+$color-accent: $yellow;
+$color-accent-light: $pale-yellow;
+$color-accent-dark: $dark-yellow;
+
+$color-link: $blue;
+$color-link-hover: $light-blue;
+$color-link-visited: $blue;
+
+$color-box-hover: $yellow;
+
+$color-alert: $light-blue;
+$color-warning: $red;
+
+// Fonts
 $font-family-body: 'Open Sans', sans-serif;
 $font-family-header: 'BioRhyme', serif;
 $font-family-title: 'Permanent Marker', cursive;
-
-$media-toggle: 700px;
-
-$color-alert: green;
-$color-warning: darkred;

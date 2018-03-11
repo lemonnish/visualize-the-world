@@ -27,4 +27,12 @@ form {
     margin: $base-unit / 2 0;
     grid-column: full;
   }
+
+  input[type=submit] {
+    border: 2px solid $color-accent;
+    background-color: $color-accent-light;
+    &:hover, &:active {
+      background-color: $color-accent;
+    }
+  }
 }

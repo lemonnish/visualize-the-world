@@ -1,10 +1,10 @@
-%discreet-link {
+%color-box-link {
   &:link, &:visited {
     text-decoration: none;
     color: $color-base-text;
   }
   &:hover, &:active {
     text-decoration: none;
-    color: $color-link-hover;
+    background-color: $color-box-hover;
   }
 }

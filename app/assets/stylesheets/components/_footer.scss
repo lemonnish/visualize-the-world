@@ -1,6 +1,10 @@
+@import 'util/color-box-link.scss';
+
+$top-spacing: $base-unit / 2;
+
 footer {
-  border-top: 1px solid black;
-  padding: $base-unit 0;
+  border-top: $base-unit solid $color-accent-light;
+  padding: 0 0 $base-unit;
 
   & > * {
     margin: 0;
@@ -9,14 +13,17 @@ footer {
     grid-column: 2 / span 2;
     display: block;
     a {
+      @extend %color-box-link;
       display: inline-block;
-      padding-right: $base-unit;
+      padding: $top-spacing $base-unit;
     }
   }
   p {
+    margin-top: $top-spacing;
     grid-column: 4 / span 3;
     display: block;
     text-align: right;
+    font-size: small;
   }
 }
 
@@ -28,9 +35,6 @@ footer {
     nav {
       display: flex;
       justify-content: center;
-      a {
-        padding: 0 $base-unit/2;
-      }
     }
     p {
       text-align: center;
