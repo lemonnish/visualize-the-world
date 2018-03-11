@@ -19,11 +19,58 @@ header {
 
   nav {
     display: block;
-    grid-column: 6;// / span 2;
-    a {
+    grid-column: 6;
+    justify-self: end;
+    align-self: end;
+    width: 100%;
+    & > * {
       display: block;
+    }
+    a {
       text-align: right;
       @extend %discreet-link
+    }
+
+    div.dropdown {
+      width: 100%;
+      position: relative;
+      input {
+        opacity: 0;
+        display: block;
+        position: absolute;
+      }
+      div.dropdown-content {
+        display: none;
+        position: absolute;
+        right: 0;
+        left: auto;
+        background-color: white;
+        border: 1px solid grey;
+        min-width: 200px;
+        & > * {
+          display: block;
+          padding: 0 $base-unit / 2;
+        }
+        a:last-of-type {
+          border-top: 1px solid lightgrey;
+        }
+      }
+      label {
+        text-align: right;
+        display: block;
+        width: 100%;
+        &:after {
+          content: ' \25BE';
+        }
+      }
+      input:checked {
+        & + label:after {
+          content: ' \25B4';
+        }
+        & ~ div.dropdown-content {
+          display: block;
+        }
+      }
     }
   }
 }
@@ -37,8 +84,20 @@ header {
       display: flex;
       justify-content: flex-end;
       margin-top: $base-unit / 2;
-      a:nth-child(2) {
+      & >:nth-child(n + 2) {
         padding-left: $base-unit;
+      }
+      div.dropdown div.dropdown-content {
+        position: relative;
+        max-width: 200px;
+        margin-left: auto;
+        border: none;
+        & > * {
+          padding: 0;
+        }
+        a:first-child {
+          border-top: 1px solid lightgrey;
+        }
       }
     }
   }

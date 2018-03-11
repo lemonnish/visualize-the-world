@@ -1,7 +1,19 @@
 <header>
   <h1><%= link_to "Visualize the World", root_path %></h1>
   <nav>
-    <%= link_to "Log in", login_path %>
-    <%= link_to "Create an account", signup_path %>
+    <% if logged_in? %>
+      <div class='dropdown'>
+        <input type='checkbox' id='toggle-account'>
+        <label for='toggle-account'>Account</label>
+        <div class='dropdown-content'>
+          <%= link_to "Manage my maps", '#' %>
+          <%= link_to "Account settings", '#' %>
+          <%= link_to "Log out", logout_path, method: 'delete' %>
+        </div>
+      </div>
+    <% else %>
+      <%= link_to "Log in", login_path %>
+      <%= link_to "Create an account", signup_path %>
+    <% end %>
   </nav>
 </header>
