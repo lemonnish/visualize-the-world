@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_action :logged_in_user, only: [:show, :edit, :update]
 
   def new
     @user = User.new
@@ -13,6 +14,15 @@ class UsersController < ApplicationController
     else
       render 'new'
     end
+  end
+
+  def show
+  end
+
+  def edit
+  end
+
+  def update
   end
 
   private
