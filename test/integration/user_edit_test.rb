@@ -15,7 +15,7 @@ class UserEditTest < ActionDispatch::IntegrationTest
     assert_redirected_to user_path
     follow_redirect!
     assert_not flash.empty?
-    assert_equal @user.reload.email, "bar@example.com"
+    assert_equal "bar@example.com", @user.reload.email
   end
 
   test "successful edit of password" do
@@ -41,10 +41,11 @@ class UserEditTest < ActionDispatch::IntegrationTest
                                        password: "barbaz",
                                        password_confirmation: "barbaz" } }
     assert_template 'users/edit'
-    assert_select 'div.alert'
+    assert_select 'div#error_explanation'
+    assert_match 'The form contains 1 error.', response.body
     @user.reload
     assert @user.authenticate("password")
-    assert_equal @user.email @old_email
+    assert_equal @old_email, @user.email
   end
 
   test "non-valid new passwords should fail edit password" do
@@ -53,10 +54,11 @@ class UserEditTest < ActionDispatch::IntegrationTest
     assert @user.authenticate("password")
     patch user_path, params: { user: { email: @old_email,
                                        old_password: "password",
-                                       password: "foobar",
+                                       password: "foo",
                                        password_confirmation: "barbaz" } }
     assert_template 'users/edit'
-    assert_select 'div.alert'
+    assert_select 'div#error_explanation'
+    assert_match 'The form contains 2 errors.', response.body
     assert @user.reload.authenticate("password")
   end
 
