@@ -1,3 +1,11 @@
 <% provide(:title, "Account settings") %>
 
 <h1>Account settings</h1>
+
+<table>
+  <tr><td>Email</td><td><%= @user.email %></td></tr>
+  <tr><td>Password</td><td>******</td></tr>
+  <tr><td>Last updated</td><td><%= @user.updated_at %></td></tr>
+</table>
+
+<%= link_to "Edit account", edit_user_path %>

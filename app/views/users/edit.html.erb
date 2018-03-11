@@ -1,3 +1,21 @@
 <% provide(:title, "Edit account settings") %>
 
 <h1>Edit account settings</h1>
+
+<%= form_for(@user, url:user_path) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+
+  <%= f.label :email %>
+  <%= f.email_field :email, class: 'form-control' %>
+
+  <%= f.label :old_password %>
+  <%= f.password_field :old_password, class: 'form-control' %>
+
+  <%= f.label :new_password %>
+  <%= f.password_field :password, class: 'form-control' %>
+
+  <%= f.label :password_confirmation %>
+  <%= f.password_field :password_confirmation, class: 'form-control' %>
+
+  <%= f.submit "Save Changes" %>
+<% end %>
