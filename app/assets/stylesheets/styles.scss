@@ -6,9 +6,12 @@
 
 @import 'layouts/default';
 
-@import 'components/header';
-@import 'components/footer';
 @import 'components/alerts';
 @import 'components/form';
+@import 'components/table';
+
+@import 'components/header';
+@import 'components/footer';
 
 @import 'layouts/homepage';
+@import 'layouts/user';
