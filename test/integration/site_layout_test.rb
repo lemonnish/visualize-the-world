@@ -16,6 +16,7 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
     get root_path
     assert_select "a[href=?]", login_path
     assert_select "a[href=?]", signup_path
+    assert_select "a[href=?]", example_path
     assert_select "a[href=?]", logout_path, count: 0
     assert_select "a[href=?]", user_path, count: 0
     assert_select "a[href=?]", maps_path, count: 0
@@ -25,8 +26,14 @@ class SiteLayoutTest < ActionDispatch::IntegrationTest
 
     assert_select "a[href=?]", login_path, count: 0
     assert_select "a[href=?]", signup_path, count: 0
+    assert_select "a[href=?]", example_path, count: 0
     assert_select "a[href=?]", logout_path
     assert_select "a[href=?]", user_path
-    assert_select "a[href=?]", maps_path
+    assert_select "a[href=?]", maps_path, count: 2
+    assert_select "a[href=?]", new_map_path
+
+    users(:lauren).maps.limit(3) do |map|
+      assert_select "a[href=?]", map_path(map)
+    end
   end
 end
