@@ -13,7 +13,7 @@ class MapsController < ApplicationController
   end
 
   def create
-    @map = current_user.maps.new(map_create_params)
+    @map = current_user.maps.new(map_params)
     if @map.save
       flash[:info] = "Map was created! Time to add some content."
       redirect_to edit_map_path(@map)
@@ -29,6 +29,16 @@ class MapsController < ApplicationController
   end
 
   def update
+    @map = Map.find_by(id: params[:id])
+    if params[:commit] == 'Cancel'
+      redirect_to edit_map_path(@map)
+    elsif @map.update_attributes(map_params)
+      flash.now[:success] = "Map settings updated."
+      redirect_to edit_map_path(@map)
+    else
+      @map.reload
+      render 'edit'
+    end
   end
 
   def destroy
@@ -39,7 +49,7 @@ class MapsController < ApplicationController
 
   private
 
-    def map_create_params
+    def map_params
       params.require(:map).permit(:title, :privacy_public)
     end
 

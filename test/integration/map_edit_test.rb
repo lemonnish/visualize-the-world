@@ -13,7 +13,7 @@ class MapEditTest < ActionDispatch::IntegrationTest
     log_in_as @user
     get edit_map_path(@map)
     assert_template 'maps/edit'
-    assert_select 'form[action="/maps"]'
+    assert_select 'form[action=?]', "/maps/#{ @map.id }"
 
     patch map_path(@map), params: { map: { title: "", privacy_public: nil } }
     assert_template 'maps/edit'
@@ -27,7 +27,8 @@ class MapEditTest < ActionDispatch::IntegrationTest
     log_in_as @user
     title = "Here's some fancy new title"
     patch map_path(@map), params: { map: { title: title, privacy_public: false } }
-    assert_redirected_to edit_map_path
+    assert_redirected_to edit_map_path(@map)
+    follow_redirect!
     assert_template 'maps/edit'
     @map.reload
     assert_equal title, @map.title
