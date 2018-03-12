@@ -1,24 +1,7 @@
 <% provide(:title, "Add map") %>
+<% provide(:form_dest, maps_path) %>
+<% @form_submit_names = ["Create map"] %>
 
 <h1>Create a new map</h1>
 
-<%= form_for(@map, url:maps_path) do |f| %>
-<%= render 'shared/error_messages', object: f.object %>
-
-<%= f.label :title %>
-<%= f.text_field :title, class: 'form-control' %>
-
-<%= f.label :privacy_settings %>
-<div class='radio'>
-  <div>
-    <%= f.radio_button :privacy_public, 'true' %>
-    <%= label :public_true, 'Public' %>
-  </div>
-  <div>
-    <%= f.radio_button :privacy_public, 'false', :checked => true %>
-    <%= label :public_false, 'Private' %>
-  </div>
-</div>
-
-<%= f.submit "Create map" %>
-<% end %>
+<%= render 'form' %>

@@ -1,0 +1,24 @@
+<%= form_for(@map, url:yield(:form_dest)) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+
+  <%= f.label :title %>
+  <%= f.text_field :title, class: 'form-control' %>
+
+  <%= f.label :privacy_settings %>
+  <div class='radio'>
+    <div>
+      <%= f.radio_button :privacy_public, 'true' %>
+      <%= label :public_true, 'Public' %>
+    </div>
+    <div>
+      <%= f.radio_button :privacy_public, 'false' %>
+      <%= label :public_false, 'Private' %>
+    </div>
+  </div>
+
+  <div class="submit">
+    <% @form_submit_names.each do |s| %>
+      <%= f.submit s %>
+    <% end %>
+  </div>
+<% end %>

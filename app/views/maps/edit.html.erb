@@ -1,35 +1,13 @@
 <% provide(:title, "Edit map") %>
+<% provide(:form_dest, map_path) %>
+<% @form_submit_names = ["Cancel", "Update map settings"] %>
 
 <h1>Edit: <%= @map.title %></h1>
-
-<%= link_to "Return to view", @map %>
+  <%= link_to "Return to view", @map %>
 
 <h2>Edit map settings</h2>
-
-<%= form_for(@map, url:map_path) do |f| %>
-  <%= render 'shared/error_messages', object: f.object %>
-
-  <%= f.label :title %>
-  <%= f.text_field :title, class: 'form-control' %>
-
-  <%= f.label :privacy_settings %>
-  <div class='radio'>
-    <div>
-      <%= f.radio_button :privacy_public, 'true' %>
-      <%= label :public_true, 'Public' %>
-    </div>
-    <div>
-      <%= f.radio_button :privacy_public, 'false' %>
-      <%= label :public_false, 'Private' %>
-    </div>
-  </div>
-
-  <div class="submit">
-    <%= f.submit "Cancel" %>
-    <%= f.submit "Update map settings" %>
-  </div>
-<% end %>
+  <%= render 'form' %>
 
 <h2>Edit map content</h2>
 
-<%= link_to "Return to view", @map %>
+  <%= link_to "Return to view", @map %>
