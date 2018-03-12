@@ -1,8 +1,31 @@
-<% provide(:class, "home") %>
+<% if logged_in? %>
+  <% provide(:class, "home login") %>
+  <% if @maps.count != 0 %>
+    <h1>My maps:</h1>
+    <nav class='maps'>
+      <% @maps.limit(3).each do |map| %>
+        <%= link_to map.title, map_path(map) %>
+      <% end %>
+      <% if @maps.count > 3 %>
+        <p>etc...</p>
+      <% end %>
+    </nav>
+    <nav class='not-maps'>
+      <%= link_to "Show all maps", maps_path %>
+      <%= link_to "Create a new map", new_map_path %>
+    </nav>
+  <% else %>
+    <nav class='not-maps'>
+      <%= link_to "Create a new map", new_map_path %>
+    </nav>
+  <% end %>
 
-<ul>
-  <li>Chart your globetrotting activities.</li>
-  <li>Keep notes about each country.</li>
-  <li>Plan your next trip.</li>
-  <li>Click <%= link_to "here", example_path %> to see an example.</li>
-</ul>
+<% else %>
+  <% provide(:class, "home logout") %>
+  <ul>
+    <li>Chart your globetrotting activities.</li>
+    <li>Keep notes about each country.</li>
+    <li>Plan your next trip.</li>
+    <li>Click <%= link_to "here", example_path %> to see an example.</li>
+  </ul>
+<% end %>

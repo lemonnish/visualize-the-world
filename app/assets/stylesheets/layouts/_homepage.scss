@@ -1,16 +1,58 @@
-main.home {
-  ul {
-    padding: 0;
-    list-style: none;
+@import 'util/color-box-link.scss';
 
-    li {
-      font-family: $font-family-header;
-      font-weight: 400;
-      font-size: 1.4 * $base-unit;
-      line-height: 2 * $base-unit;
-      
-      &:last-of-type {
-        margin-top: $base-unit;
+main.home {
+  &.login {
+    nav {
+      margin: 0 auto;
+      > * {
+        display: block;
+        padding: $base-unit / 2 $base-unit;
+      }
+      a {
+        @extend %color-box-link;
+      }
+    }
+    nav.maps {
+      margin-bottom: $base-unit * 2;
+      > * {
+        text-align: left;
+        margin: 0;
+        border-top: 1px solid $color-accent;
+        &:last-child {
+          border-bottom: 1px solid $color-accent;
+        }
+      }
+      a:hover, a:active {
+        background-color: $color-accent-light;
+      }
+    }
+    nav.not-maps {
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      > * {
+        border: 2px solid $color-accent;
+        &:last-child {
+          border-left: none;
+        }
+        background-color: $color-accent-light;
+      }
+    }
+  }
+  &.logout {
+    ul {
+      padding: 0;
+      list-style: none;
+
+      li {
+        font-family: $font-family-header;
+        font-weight: 400;
+        font-size: 1.4 * $base-unit;
+        line-height: 2 * $base-unit;
+
+        &:last-of-type {
+          margin-top: $base-unit;
+        }
       }
     }
   }
