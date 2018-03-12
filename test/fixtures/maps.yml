@@ -1,9 +1,9 @@
 basic_public:
   title: "Public Map"
-  public: true
+  privacy_public: true
   user: lauren
 
 basic_private:
   title: "Private Map"
-  public: false
+  privacy_public: false
   user: lauren

@@ -9,9 +9,17 @@ class MapsController < ApplicationController
   end
 
   def new
+    @map = Map.new
   end
 
   def create
+    @map = current_user.maps.new(map_create_params)
+    if @map.save
+      flash[:info] = "Map was created! Time to add some content."
+      redirect_to edit_map_path(@map)
+    else
+      render 'new'
+    end
   end
 
   def edit
@@ -31,6 +39,10 @@ class MapsController < ApplicationController
 
   private
 
+    def map_create_params
+      params.require(:map).permit(:title, :privacy_public)
+    end
+
     # Confirms the correct user
     def correct_user
       @map = current_user.maps.find_by(id: params[:id])
@@ -42,7 +54,7 @@ class MapsController < ApplicationController
       @map = Map.find_by(id: params[:id])
       if @map.nil?
         redirect_to root_url
-      elsif !@map.public
+      elsif !@map.privacy_public
         if !logged_in?
           flash[:danger] = "Please log in."
           redirect_to login_url

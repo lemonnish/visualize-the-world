@@ -35,4 +35,16 @@ form {
       background-color: $color-accent;
     }
   }
+
+  div.radio {
+    display: flex;
+    div {
+      flex-grow: 1;
+      flex-wrap: wrap;
+    }
+    div > * {
+      display: inline-block;
+      width: auto;
+    }
+  }
 }

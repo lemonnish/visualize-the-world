@@ -11,19 +11,34 @@ class MapCreateTest < ActionDispatch::IntegrationTest
     get new_map_path
     assert_template 'maps/new'
     assert_select 'form[action="/maps"]'
+    title = "New map"
     assert_difference '@user.maps.count', 1 do
-      post maps_path, params: { map: { title: "New map", public: true } }
+      post maps_path, params: { map: { title: title, privacy_public: true } }
     end
-    @map = assigns(:map)
-    assert_redirected_to edit_map_path(@map)
+    map = assigns(:map)
+    assert_redirected_to edit_map_path(map)
     follow_redirect!
     assert_template 'maps/edit'
+
+    map.reload
+    assert_equal title, map.title
+    assert map.privacy_public
+
+    title = "New map - private"
+    assert_difference '@user.maps.count', 1 do
+      post maps_path, params: { map: { title: title, privacy_public: false } }
+    end
+    map_private = assigns(:map)
+    assert_redirected_to edit_map_path(map_private)
+    map_private.reload
+    assert_equal title, map_private.title
+    assert_not map_private.privacy_public
   end
 
   test "invalid map creation" do
     log_in_as @user
     assert_no_difference '@user.maps.count' do
-      post maps_path, params: { map: { title: "", public: false } }
+      post maps_path, params: { map: { title: "", privacy_public: false } }
     end
     assert_template 'maps/new'
     assert_select 'div#error_explanation'
@@ -35,7 +50,7 @@ class MapCreateTest < ActionDispatch::IntegrationTest
     assert_redirected_to login_path
 
     assert_no_difference 'Map.count' do
-      post maps_path, params: { map: { title: "New map", public: false } }
+      post maps_path, params: { map: { title: "New map", privacy_public: false } }
     end
     assert_redirected_to login_path
   end

@@ -18,7 +18,7 @@
       <td><%= map.title %></td>
       <td><%= link_to "view", map_path(map) %></td>
       <td><%= link_to "edit", edit_map_path(map) %></td>
-      <td><%= map.public? ? "Publicly visible" : "Private" %></td>
+      <td><%= map.privacy_public? ? "Publicly visible" : "Private" %></td>
       <td><%= link_to "delete", map_path(map), method: :delete,
                                 data: { confirm: "You sure?" } %></td>
     </tr>
