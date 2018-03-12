@@ -17,23 +17,32 @@ form {
     padding: 0 $base-unit / 4;
   }
 
-  & > input:last-of-type {
+  > input[type=submit], div.submit {
     margin-top: $base-unit;
-    padding: $base-unit / 2;
     grid-column: full;
   }
-
-  p {
-    margin: $base-unit / 2 0;
-    grid-column: full;
-  }
-
   input[type=submit] {
+    padding: $base-unit / 2;
     border: 2px solid $color-accent;
     background-color: $color-accent-light;
     &:hover, &:active {
       background-color: $color-accent;
     }
+  }
+  div.submit {
+    display: flex;
+    input:not(:last-child) {
+      background-color: white;
+      border-right: none;
+      &:hover, &:active {
+        background-color: $color-accent;
+      }
+    }
+  }
+
+  p {
+    margin: $base-unit / 2 0;
+    grid-column: full;
   }
 
   div.radio {
