@@ -6,7 +6,6 @@
 <% if @maps.count == 0 %>
   <p>
     You currently have no maps.
-    <%= link_to "Create a map here!", new_map_path %>
   </p>
 <% else %>
   <table>
@@ -25,3 +24,5 @@
   <% end %>
   </table>
 <% end %>
+
+<%= link_to "Create a new map", new_map_path %>
