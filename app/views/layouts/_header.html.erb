@@ -4,7 +4,10 @@
     <% if logged_in? %>
       <div class='dropdown'>
         <input type='checkbox' id='toggle-account'>
-        <label for='toggle-account'>Account</label>
+        <label for='toggle-account'>
+          <span>Account</span>
+          <span class='arrow'>&#9662;</span>
+        </label>
         <div class='dropdown-content'>
           <%= link_to "Manage my maps", maps_path %>
           <%= link_to "Account settings", user_path %>

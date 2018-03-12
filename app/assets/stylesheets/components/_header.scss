@@ -60,13 +60,17 @@ header {
         @extend %color-box-link;
         text-align: right;
         width: 100%;
-        &:after {
-          content: ' \25BE';
+        span {
+          display: inline-block;
         }
       }
       input:checked {
-        & + label:after {
-          content: ' \25B4';
+        & + label span.arrow {
+          -moz-transform: scale(1, -1) translateY(-3px);
+          -webkit-transform: scale(1, -1) translateY(-3px);
+          -o-transform: scale(1, -1) translateY(-3px);
+          -ms-transform: scale(1, -1) translateY(-3px);
+          transform: scale(1, -1) translateY(-3px);
         }
         & ~ div.dropdown-content {
           display: block;
