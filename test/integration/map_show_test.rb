@@ -38,4 +38,12 @@ class MapShowTest < ActionDispatch::IntegrationTest
     assert_redirected_to root_path
     assert_not flash.empty?
   end
+
+  test "should display map contents" do
+    get map_path(@map)
+    @map.map_contents.each do |content|
+      assert_match content.comment, response.body
+      assert_match content.country_code, response.body
+    end
+  end
 end
