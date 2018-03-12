@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  country_code: FR
+  comment: I'd like to visit France someday.
+  map: basic_public
+
+two:
+  country_code: LA
+  comment: We didn't get a chance to visit Laos on our last trip in SE Asia.
+  map: basic_public
