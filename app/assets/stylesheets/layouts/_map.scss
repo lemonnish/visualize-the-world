@@ -1,0 +1,12 @@
+main.map-index {
+  table {
+    tr {
+      > * {
+        text-align: center;
+      }
+      > :first-child {
+        text-align: left;
+      }
+    }
+  }
+}
