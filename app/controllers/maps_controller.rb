@@ -23,6 +23,7 @@ class MapsController < ApplicationController
   end
 
   def edit
+    @new_content = MapContent.new
   end
 
   def show
@@ -30,13 +31,14 @@ class MapsController < ApplicationController
 
   def update
     @map = Map.find_by(id: params[:id])
-    if params[:commit] == 'Cancel'
+    if params[:map][:commit] == 'Cancel'
       redirect_to edit_map_path(@map)
     elsif @map.update_attributes(map_params)
       flash.now[:success] = "Map settings updated."
       redirect_to edit_map_path(@map)
     else
       @map.reload
+      @new_content = MapContent.new
       render 'edit'
     end
   end

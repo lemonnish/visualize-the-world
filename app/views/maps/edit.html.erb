@@ -1,13 +1,30 @@
 <% provide(:title, "Edit map") %>
-<% provide(:form_dest, map_path) %>
+<% provide(:form_dest, map_path(@map)) %>
 <% @form_submit_names = ["Cancel", "Update map settings"] %>
 
 <h1>Edit: <%= @map.title %></h1>
   <%= link_to "Return to view", @map %>
 
 <h2>Edit map settings</h2>
-  <%= render 'form' %>
+  <%= render 'maps/form' %>
+
+<h2>Add map content</h2>
+
+  <%= form_for(@new_content, url:map_contents_path(@map)) do |f| %>
+    <%= render 'shared/error_messages', object: f.object %>
+
+    <%= f.label :country_code %>
+    <%= f.text_field :country_code, class: 'form-control' %>
+
+    <%= f.text_area :comment, placeholder: "Write something here (optional)" %>
+
+    <div class="submit">
+      <%= f.submit "Cancel" %>
+      <%= f.submit "Add country info" %>
+    </div>
+  <% end %>
 
 <h2>Edit map content</h2>
+
 
   <%= link_to "Return to view", @map %>

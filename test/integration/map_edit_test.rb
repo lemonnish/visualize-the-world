@@ -21,6 +21,13 @@ class MapEditTest < ActionDispatch::IntegrationTest
     @map.reload
     assert_equal @old_title, @map.title
     assert_equal @old_privacy_public, @map.privacy_public
+
+    patch map_path(@map), params: { map: { title: "Hi There",
+                                privacy_public: false, commit: "Cancel" } }
+    assert_redirected_to edit_map_path(@map)
+    @map.reload
+    assert_equal @old_title, @map.title
+    assert_equal @old_privacy_public, @map.privacy_public
   end
 
   test "successful map update" do

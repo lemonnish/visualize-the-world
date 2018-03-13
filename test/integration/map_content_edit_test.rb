@@ -11,68 +11,93 @@ class MapContentEditTest < ActionDispatch::IntegrationTest
   end
 
   test "successful add/update/delete of map content" do
+    # straightforward add
     get edit_map_path(@map)
-    assert_select 'form[action=?]', "/maps/#{ @map.id }/map_contents"
-    assert_difference '@maps.map_contents.count', 1 do
+    assert_select 'form[action=?]', map_contents_path(@map)
+    assert_difference '@map.map_contents.count', 1 do
       post map_contents_path(@map), params: {
         map_content: { country_code: "DE", comment: "" } }
     end
-    @new_content = assign(:map_contents)
+    new_content = assigns(:content)
+    assert_equal "DE", new_content.country_code
+    assert_redirected_to edit_map_path(@map)
+    follow_redirect!
     assert_template 'maps/edit'
 
-    assert_select 'form[action=?]',
-      "/maps/#{ @map.id }/map_contents/#{ @new_content.id }"
+    # straightforward update
+    assert_select 'form[action=?]', map_content_path(@map, new_content)
     text = "Here's some text about Germany!"
-    patch map_content_path(@map, @new_content), params: {
+    patch map_content_path(@map, new_content), params: {
       map_content: { comment: text } }
+    assert_redirected_to edit_map_path(@map)
+    follow_redirect!
     assert_template 'maps/edit'
-    @new_content.reload
-    assert_equal text, @new_content.comment
+    new_content.reload
+    assert_equal text, new_content.comment
 
-    assert_select "a[href=?]", map_content_path(@map, @new_content)
+    # straightforward delete
+    assert_select "a[href=?]", map_content_path(@map, new_content)
     assert_difference '@maps.map_contents.count', -1 do
-      delete map_content_path(@map, @new_content)
+      delete map_content_path(@map, new_content)
     end
+    assert_redirected_to edit_map_path(@map)
+
+    # ignore country_code changes when updating
+    text = "Shouldn't be able to turn France into Germany"
+    patch map_content_path(@map, @content), params: {
+      map_content: { country_code: "DE", comment: text } }
+    assert_redirected_to edit_map_path(@map)
+    follow_redirect!
+    assert_template 'maps/edit'
+    assert_select 'div#error_explanation', count: 0
+    @content.reload
+    assert_equal "FR", @content.country_code
+    assert_equal text, @content.comment
   end
 
   test "unsuccessful add of map content" do
-    # duplicate country_code
+    # clicked 'cancel'
     assert_no_difference '@map.map_contents.count' do
       post map_contents_path(@map), params: {
-        map_content: { country_code: "FR", comment: "" } }
+        map_content: { country_code: "DE", comment: "Germany", commit: "Cancel" } }
     end
-    assert_template 'maps/new'
-    assert_select 'div#error_explanation'
-    assert_select 'div.field_with_errors', 2
+    assert_redirected_to edit_map_path(@map)
+    follow_redirect!
 
     # no country_code
-    assert_no_difference '@maps.map_contents.count' do
+    assert_no_difference '@map.map_contents.count' do
       post map_contents_path(@map), params: {
         map_content: { country_code: "", comment: "No country_code..." } }
     end
-    assert_template 'maps/new'
+    assert_template 'maps/edit'
+    assert_select 'div#error_explanation'
+    assert_select 'div.field_with_errors', 2
+
+    # duplicate country_code
+    assert_no_difference '@map.map_contents.count' do
+      post map_contents_path(@map), params: {
+        map_content: { country_code: "FR", comment: "Can't have 2 France entries" } }
+    end
+    assert_template 'maps/edit'
     assert_select 'div#error_explanation'
     assert_select 'div.field_with_errors', 2
   end
 
   test "unsuccessful update of map content" do
+    text = "France!"
+    # clicked 'cancel'
+    patch map_content_path(@map, @content), params: {
+      map_content: { comment: text, commit: 'Cancel' } }
+    assert_redirected_to edit_map_path(@map)
+    @content.reload
+    assert_not_equal text, @content.comment
+
     # wrong :map_id
     patch map_content_path(@other_map, @content), params: {
-      map_content: { comment: "France!" } }
+      map_content: { comment: text } }
     assert_redirected_to maps_path
-    assert_select 'div#error_explanation'
     @content.reload
-    assert_not_equal "France!", @content.comment
-
-    # ignore country_code changes
-    text = "Shouldn't be able to turn France into Germany"
-    patch map_content_path(@map, @content), params: {
-      map_content: { country_code: "DE", comment: text } }
-    assert_template
-    assert_select 'div#error_explanation', count: 0
-    @content.reload
-    assert_equal "FR", @content.country_code
-    assert_equal text, @content.comment
+    assert_not_equal text, @content.comment
   end
 
   test "unsuccessful delete of map content" do
