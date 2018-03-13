@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   post  '/login',   to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
   resource :user,   only: [:edit, :show, :update, :destroy]
-  resources :maps
-  resources :map_contents, only: [:create, :update, :destroy]
+  resources :maps do
+    resources :map_contents, only: [:create, :update, :destroy],
+                             as: 'contents'
+  end
 end
