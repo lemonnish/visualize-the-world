@@ -5,3 +5,17 @@
 <% if current_user?(@map.user) %>
   <%= link_to "Edit map", edit_map_path %>
 <% end %>
+
+<h2>Map content</h2>
+
+<% if @map.map_contents.count > 0 %>
+  <table>
+    <tr><th>Country</th><th>Comment</th></tr>
+    <% @map.map_contents.each do |content| %>
+      <tr>
+        <td><%= content.country_code %></td>
+        <td><%= content.comment %></td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>

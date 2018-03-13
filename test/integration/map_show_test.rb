@@ -42,7 +42,7 @@ class MapShowTest < ActionDispatch::IntegrationTest
   test "should display map contents" do
     get map_path(@map)
     @map.map_contents.each do |content|
-      assert_match content.comment, response.body
+      assert_match CGI.escapeHTML(content.comment), response.body
       assert_match content.country_code, response.body
     end
   end
