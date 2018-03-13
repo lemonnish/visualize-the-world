@@ -22,7 +22,7 @@ class MapContentsController < ApplicationController
       if @map.nil?
         redirect_to root_url
       else
-        @content = @map.map_content.find_by(id: params[:id])
+        @content = @map.map_contents.find_by(id: params[:id])
         redirect_to request.referrer || map_path(@map) if @content.nil?
       end
     end

@@ -9,3 +9,8 @@ laos:
   country_code: LA
   comment: We didn't get a chance to visit Laos on our last trip in SE Asia.
   map: basic_public
+
+us:
+  country_code: US
+  comment: So many different states to visit in America.
+  map: basic_private
