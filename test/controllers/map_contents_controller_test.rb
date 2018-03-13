@@ -9,8 +9,8 @@ class MapContentsControllerTest < ActionDispatch::IntegrationTest
 
   test "should redirect create when not logged in" do
     assert_no_difference 'MapContent.count' do
-      post map_contents_path(@map), params: { map_content: { country_code: "FR",
-                              comment: "Here's another French post" } }
+      post map_contents_path(@map), params: { map_content: { country_code: "DE",
+                              comment: "Here's a post about Germany" } }
     end
     assert_redirected_to login_path
   end
