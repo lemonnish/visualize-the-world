@@ -7,7 +7,7 @@ class Map < ApplicationRecord
 
   # returns an array of all valid country codes
   def self.country_codes
-    %w(CL DE FR LA)
+    %w(cl de fr la)
   end
 
   # return the appropriate MapContent.comment
