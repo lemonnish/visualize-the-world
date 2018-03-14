@@ -26,5 +26,21 @@
 
 <h2>Edit map content</h2>
 
+  <%= form_for(@map, url:map_contents_path(@map), method: :patch,
+                     as: :map_content, html: { class:"edit_map_contents" }) do |f| %>
+    <%= render 'shared/error_messages', object: f.object %>
+
+    <% @map.map_contents.each do |content| %>
+      <% field = "comment_#{ content.country_code }".to_sym %>
+      <%= f.label field, content.country_code %>
+      <%= f.text_area field %>
+      <%= link_to "delete", map_content_path(@map, content), method: :delete %>
+    <% end %>
+
+    <div class="submit">
+      <%= f.submit "Cancel" %>
+      <%= f.submit "Save changes" %>
+    </div>
+  <% end %>
 
   <%= link_to "Return to view", @map %>

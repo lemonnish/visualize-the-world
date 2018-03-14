@@ -10,7 +10,8 @@ Rails.application.routes.draw do
   delete '/logout', to: 'sessions#destroy'
   resource :user,   only: [:edit, :show, :update, :destroy]
   resources :maps do
-    resources :map_contents, only: [:create, :update, :destroy],
+    patch '/map_contents',   to: 'map_contents#update', as: 'contents'
+    resources :map_contents, only: [:create, :destroy],
                              as: 'contents'
   end
 end

@@ -1,8 +1,8 @@
 class MapContentsController < ApplicationController
   before_action :logged_in_user
   before_action :correct_user
-  before_action :correct_map, only: [:update, :destroy]
-  before_action :define_page_variables, only: [:update, :destroy]
+  before_action :correct_map, only: [:destroy]
+  before_action :define_page_variables, only: [:create, :update, :destroy]
 
   def create
     if params[:map_content][:commit] == 'Cancel'
@@ -14,6 +14,7 @@ class MapContentsController < ApplicationController
         redirect_to edit_map_path(@map)
       else
         @new_content = @content
+        @map.reload
         render 'maps/edit'
       end
     end
@@ -22,18 +23,23 @@ class MapContentsController < ApplicationController
   def update
     if params[:map_content][:commit] == 'Cancel'
       redirect_to edit_map_path(@map)
-    elsif @content.update_attributes(update_content_params)
-      flash.now[:success] = "Map content updated."
-      redirect_to edit_map_path(@map)
     else
-      render 'maps/edit'
+      input_params = update_content_params
+      if input_params.empty?
+        render 'maps/edit'
+      elsif @map.update_content(update_content_params)
+        flash.now[:success] = "Map content updated."
+        redirect_to edit_map_path(@map)
+      else
+        render 'maps/edit'
+      end
     end
   end
 
   def destroy
     @content.delete
     flash[:success] = "Country deleted"
-    redirect_to request.referrer || root_url
+    redirect_to edit_map_path(@map)
   end
 
   private
@@ -43,7 +49,8 @@ class MapContentsController < ApplicationController
     end
 
     def update_content_params
-      params.require(:map_content).permit(:comment)
+      params.require(:map_content).permit(
+        @map.map_contents.map { |f| "comment_#{f.country_code}".to_sym } )
     end
 
     def define_page_variables
