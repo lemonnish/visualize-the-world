@@ -16,3 +16,28 @@ main.map-show {
     text-align: left;
   }
 }
+
+main.map-edit {
+  form.new_map_content {
+    > label, > input {
+      text-align: left;
+      grid-column: 1;
+    }
+    textarea {
+      grid-row: 1 / span 2;
+      grid-column: 2;
+    }
+  }
+  form.edit_map_contents {
+    > label {
+      text-align: left;
+    }
+    > a {
+      display: block;
+      grid-column: 1;
+    }
+    textarea {
+      grid-row: span 2;
+    }
+  }
+}
