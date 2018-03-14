@@ -69,10 +69,17 @@ class MapContentEditTest < ActionDispatch::IntegrationTest
   end
 
   test "unsuccessful add of map content" do
+    # clicked 'cancel' with no info specified
+    assert_no_difference '@map.map_contents.count' do
+      post map_contents_path(@map), params: { commit: "Cancel" }
+    end
+    assert_redirected_to edit_map_path(@map)
+    follow_redirect!
+
     # clicked 'cancel'
     assert_no_difference '@map.map_contents.count' do
       post map_contents_path(@map), params: {
-        map_content: { country_code: "de", comment: "Germany", commit: "Cancel" } }
+        map_content: { country_code: "de", comment: "Germany"}, commit: "Cancel" }
     end
     assert_redirected_to edit_map_path(@map)
     follow_redirect!
@@ -106,10 +113,14 @@ class MapContentEditTest < ActionDispatch::IntegrationTest
   end
 
   test "unsuccessful update of map content" do
+    # clicked 'cancel' with no info specified
+    patch map_contents_path(@map), params: { commit: 'Cancel' }
+    assert_redirected_to edit_map_path(@map)
+
     # clicked 'cancel'
     text = "France!"
     patch map_contents_path(@map), params: {
-      map_content: { comment_fr: text, commit: 'Cancel' } }
+      map_content: { comment_fr: text }, commit: 'Cancel' }
     assert_redirected_to edit_map_path(@map)
     @content.reload
     assert_not_equal text, @content.comment

@@ -5,7 +5,7 @@ class MapContentsController < ApplicationController
   before_action :define_page_variables, only: [:create, :update, :destroy]
 
   def create
-    if params[:map_content][:commit] == 'Cancel'
+    if params[:commit] == 'Cancel'
       redirect_to edit_map_path(@map)
     else
       @content = @map.map_contents.new(new_content_params)
@@ -21,7 +21,7 @@ class MapContentsController < ApplicationController
   end
 
   def update
-    if params[:map_content][:commit] == 'Cancel'
+    if params[:commit] == 'Cancel'
       redirect_to edit_map_path(@map)
     else
       input_params = update_content_params
