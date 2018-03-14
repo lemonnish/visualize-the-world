@@ -31,7 +31,7 @@ class MapsController < ApplicationController
 
   def update
     @map = Map.find_by(id: params[:id])
-    if params[:map][:commit] == 'Cancel'
+    if params[:commit] == 'Cancel'
       redirect_to edit_map_path(@map)
     elsif @map.update_attributes(map_params)
       flash.now[:success] = "Map settings updated."
