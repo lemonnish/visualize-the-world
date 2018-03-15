@@ -40,6 +40,15 @@ class Map < ApplicationRecord
     map_contents.all.map{ |m| "#country#{ Map.convert_country_code_alpha_to_num(m.country_code) }" }
   end
 
+  def get_selected_codes
+    map_contents.all.map{ |m| m.country_code }
+  end
+
+  # returns an array of all country_codes not currently in use
+  def get_remaining_codes
+    Map.country_codes - get_selected_codes
+  end
+
   # return the appropriate MapContent.comment
   self.country_codes.each do |country_code|
     define_method "comment_#{ country_code }" do
