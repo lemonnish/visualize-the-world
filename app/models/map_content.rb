@@ -13,8 +13,8 @@ class MapContent < ApplicationRecord
   # Verify that the country_code (lowercase) is in the
   # list of allowed countries
   def exists_in_country_list
-    country_code.downcase!
-    if !Map.country_codes.include?(country_code)
+    country_code.upcase!
+    if !Map.is_country_code?(country_code)
       errors.add(:country_code, "is not in the list of allowed countries")
     end
   end

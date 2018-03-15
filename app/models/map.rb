@@ -7,22 +7,27 @@ class Map < ApplicationRecord
 
   # returns an array of all valid country codes
   def self.country_codes
-    %w(cl de fr la)
+    ISO3166::Country.codes
+  end
+
+  # returns true if country code is valid
+  def self.is_country_code?(string)
+    ISO3166::Country.codes.include?(string)
+  end
+
+  # return the name of the country based on the alpha-2 country code
+  def self.get_name_from_country_code(string)
+    country = ISO3166::Country.new(string)
+    name = country.name
+    if local = country.local_name then
+      name = "#{ name } / #{ local }" if local != name
+    end
+    return name
   end
 
   # get the country num-3 code that matches the alpha-2 code
   def self.convert_country_code_alpha_to_num(string)
-    if string == "cl"
-      "152"
-    elsif string == "de"
-      "276"
-    elsif string == "fr"
-      "250"
-    elsif string == "la"
-      "418"
-    else
-      "840"
-    end
+    ISO3166::Country.new(string).number
   end
 
   # returns an array of all SVG id's for selected countries
