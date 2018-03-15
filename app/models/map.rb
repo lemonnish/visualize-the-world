@@ -17,6 +17,11 @@ class Map < ApplicationRecord
 
   # return the name of the country based on the alpha-2 country code
   def self.get_name_from_country_code(string)
+    ISO3166::Country.new(string).name
+  end
+
+  # return the name and local country name based on the  alpha-2 country code
+  def self.get_ext_name_from_country_code(string)
     country = ISO3166::Country.new(string)
     name = country.name
     if local = country.local_name then

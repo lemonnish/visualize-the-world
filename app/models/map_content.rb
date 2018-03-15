@@ -8,6 +8,14 @@ class MapContent < ApplicationRecord
                                          scope: :map_id }
   validate :exists_in_country_list
 
+  def country_name
+    Map.get_name_from_country_code(country_code)
+  end
+  
+  def ext_country_name
+    Map.get_ext_name_from_country_code(country_code)
+  end
+
   private
 
   # Verify that the country_code (lowercase) is in the

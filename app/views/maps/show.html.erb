@@ -16,7 +16,7 @@
     <tr><th>Country</th><th>Comment</th></tr>
     <% @map.map_contents.each do |content| %>
       <tr>
-        <td><%= content.country_code %></td>
+        <td><%= content.country_name %></td>
         <td><%= content.comment %></td>
       </tr>
     <% end %>

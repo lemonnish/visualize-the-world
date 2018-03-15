@@ -33,7 +33,7 @@
 
     <% @map.map_contents.each do |content| %>
       <% field = "comment_#{ content.country_code }".to_sym %>
-      <%= f.label field, content.country_code %>
+      <%= f.label field, content.country_name %>
       <%= f.text_area field %>
       <%= link_to "delete", map_content_path(@map, content), method: :delete %>
     <% end %>
