@@ -10,6 +10,26 @@ class Map < ApplicationRecord
     %w(cl de fr la)
   end
 
+  # get the country num-3 code that matches the alpha-2 code
+  def self.convert_country_code_alpha_to_num(string)
+    if string == "cl"
+      "152"
+    elsif string == "de"
+      "276"
+    elsif string == "fr"
+      "250"
+    elsif string == "la"
+      "418"
+    else
+      "840"
+    end
+  end
+
+  # returns an array of all SVG id's for selected countries
+  def get_selected_ids
+    map_contents.all.map{ |m| "#country#{ Map.convert_country_code_alpha_to_num(m.country_code) }" }
+  end
+
   # return the appropriate MapContent.comment
   self.country_codes.each do |country_code|
     define_method "comment_#{ country_code }" do

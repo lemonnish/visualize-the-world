@@ -15,6 +15,28 @@ main.map-show {
   table tr > * {
     text-align: left;
   }
+  svg {
+    width: 100%;
+    height: auto;
+    display: block;
+    .map-borders {
+      fill: none;
+      stroke: black;
+      stroke-width: .5px;
+    }
+    .map-graticule {
+      fill: none;
+      stroke: lightgrey;
+      stroke-width: .5px;
+    }
+    .map-country {
+      fill: white;
+      stroke: none;
+    }
+    .map-country:hover {
+      fill: lightgreen;
+    }
+  }
 }
 
 main.map-edit {

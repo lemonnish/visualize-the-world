@@ -4,8 +4,10 @@
 <h1><%= @map.title %></h1>
 
 <% if current_user?(@map.user) %>
-  <%= link_to "Edit map", edit_map_path %>
+  <%= link_to "Edit map", edit_map_path(@map) %>
 <% end %>
+
+<svg id="world-map" width=900 height=450 viewBox="0 0 900 450"></svg>
 
 <h2>Map content</h2>
 
@@ -20,3 +22,50 @@
     <% end %>
   </table>
 <% end %>
+
+
+<style>
+  <%= @map.get_selected_ids.join(", ") %> {
+    fill: darkred;
+  }
+  <%= @map.get_selected_ids.map{ |i| i + ":hover" }.join(", ") %> {
+    fill: red;
+  }
+</style>
+
+<script>
+  var svg = d3.select('#world-map'),
+      width = +svg.attr('width'),
+      height = +svg.attr('height');
+  var projection = d3.geoAirocean()
+    .fitSize([width, height], { type: "Sphere" });
+  var geoPath = d3.geoPath()
+    .projection(projection);
+  d3.json("https://unpkg.com/world-atlas@1/world/110m.json", function(error, world) {
+    if (error) throw error;
+    var countries = topojson.feature(world, world.objects.countries);
+    var borders = topojson.mesh(world, world.objects.countries);
+
+    svg.insert('path')
+        .datum(d3.geoGraticule())
+        .attr("class", "map-graticule")
+        .attr("d", geoPath);
+
+    svg.selectAll('path.country')
+        .data(countries.features)
+      .enter().append("path")
+        .attr("class", "map-country")
+        .attr("id", function(d) { return "country" + d.id; })
+        .attr("d", geoPath);
+
+    svg.insert('path')
+        .datum(borders)
+        .attr("class", "map-borders")
+        .attr("d", geoPath);
+
+    svg.insert('path')
+        .datum({ type: "Sphere" })
+        .attr("class", "map-borders")
+        .attr("d", geoPath);
+  });
+</script>
