@@ -12,7 +12,8 @@ class Map < ApplicationRecord
     [ { d3: 'geoAirocean', name: "Dymaxion" },
       { d3: 'geoNaturalEarth1', name: "Natural Earth" },
       { d3: 'geoPolyhedralButterfly', name: "Polyhedral butterfly" },
-      { d3: 'geoBertin1953', name: "Jacques Bertin: 1953" } ]
+      { d3: 'geoBertin1953', name: "Jacques Bertin: 1953" },
+      { d3: 'geoConicEqualArea', name: "Conic equal-area" } ]
   end
 
   # convert the array of valid projection hashes to an array of arrays
