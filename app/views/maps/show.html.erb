@@ -35,6 +35,10 @@
   <% end %>
 </div>
 
+<% if !@map.blurb.blank? %>
+  <p><%= @map.blurb %></p>
+<% end %>
+
 <h2>Map content</h2>
 
 <% if @map.map_contents.count > 0 %>

@@ -52,7 +52,7 @@ class MapsController < ApplicationController
   private
 
     def map_params
-      params.require(:map).permit(:title, :privacy_public)
+      params.require(:map).permit(:title, :privacy_public, :blurb)
     end
 
     # Confirms the user matches the map owner

@@ -12,8 +12,9 @@ class MapCreateTest < ActionDispatch::IntegrationTest
     assert_template 'maps/new'
     assert_select 'form[action="/maps"]'
     title = "New map"
+    blurb = "This is a brave new map"
     assert_difference '@user.maps.count', 1 do
-      post maps_path, params: { map: { title: title, privacy_public: true } }
+      post maps_path, params: { map: { title: title, privacy_public: true, blurb: blurb } }
     end
     map = assigns(:map)
     assert_redirected_to edit_map_path(map)
@@ -23,6 +24,7 @@ class MapCreateTest < ActionDispatch::IntegrationTest
     map.reload
     assert_equal title, map.title
     assert map.privacy_public
+    assert_equal blurb, map.blurb
 
     title = "New map - private"
     assert_difference '@user.maps.count', 1 do
@@ -33,6 +35,7 @@ class MapCreateTest < ActionDispatch::IntegrationTest
     map_private.reload
     assert_equal title, map_private.title
     assert_not map_private.privacy_public
+    assert map_private.blurb.blank?
   end
 
   test "invalid map creation" do

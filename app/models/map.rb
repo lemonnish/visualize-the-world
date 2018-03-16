@@ -4,6 +4,16 @@ class Map < ApplicationRecord
   default_scope -> { order(updated_at: :desc) }
   validates :user_id, presence: true
   validates :title, presence: true
+  validates :projection, presence: true
+  validate :exists_in_projection_list
+
+  # returns an array of all valid projections
+  def self.projections
+    [ { d3: 'geoAirocean', name: "Dymaxion" },
+      { d3: 'geoNaturalEarth1', name: "Natural Earth" },
+      { d3: 'geoPolyhedralButterfly', name: "Polyhedral butterfly" },
+      { d3: 'geoBertin1953', name: "Jacques Bertin: 1953" } ]
+  end
 
   # returns an array of all valid country codes
   def self.country_codes
@@ -32,7 +42,7 @@ class Map < ApplicationRecord
     if local = country.local_name then
       name.push(local) if !name.include?(local)
     end
-    
+
     return name
   end
 
@@ -99,4 +109,15 @@ class Map < ApplicationRecord
     end
     !errors.any?
   end
+
+  private
+
+    # Verify that the projection is in the
+    # list of allowed projections
+    def exists_in_projection_list
+      projection_list = Map.projections.map{ |p| p[:d3] }
+      if !projection_list.include?(projection)
+        errors.add(:projection, "is not in the list of allowed projections")
+      end
+    end
 end

@@ -2,8 +2,15 @@ basic_public:
   title: "Public Map"
   privacy_public: true
   user: lauren
+  blurb: "Here's a basic public map. It should be visiblie to all users."
 
 basic_private:
   title: "Private Map"
   privacy_public: false
+  user: lauren
+  blurb: "I like my privacy - no one can see this map but me!!"
+
+taciturn:
+  title: "I don't like to talk"
+  privacy_public: public
   user: lauren

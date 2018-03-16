@@ -7,6 +7,7 @@ class MapEditTest < ActionDispatch::IntegrationTest
     @map = maps(:basic_public)
     @old_title = @map.title
     @old_privacy_public = @map.privacy_public
+    @old_blurb = @map.blurb
   end
 
   test "unsuccessful map update" do
@@ -15,31 +16,36 @@ class MapEditTest < ActionDispatch::IntegrationTest
     assert_template 'maps/edit'
     assert_select 'form[action=?]', "/maps/#{ @map.id }"
 
-    patch map_path(@map), params: { map: { title: "", privacy_public: nil } }
+    patch map_path(@map), params: { map: { title: "", privacy_public: nil, blurb: "hi there" } }
     assert_template 'maps/edit'
     assert_select 'div#error_explanation'
     @map.reload
     assert_equal @old_title, @map.title
     assert_equal @old_privacy_public, @map.privacy_public
+    assert_equal @old_blurb, @map.blurb
 
-    patch map_path(@map), params: { map: { title: "Hi There",
+    patch map_path(@map), params: { map: { title: "Hi There", blurb: "hi there",
                           privacy_public: false }, commit: "Cancel" }
     assert_redirected_to edit_map_path(@map)
     @map.reload
     assert_equal @old_title, @map.title
     assert_equal @old_privacy_public, @map.privacy_public
+    assert_equal @old_blurb, @map.blurb
   end
 
   test "successful map update" do
     log_in_as @user
     title = "Here's some fancy new title"
-    patch map_path(@map), params: { map: { title: title, privacy_public: false } }
+    blurb = "Here's something you didn't know about the map!"
+    patch map_path(@map), params: { map: { title: title, privacy_public: false,
+                                           blurb: blurb } }
     assert_redirected_to edit_map_path(@map)
     follow_redirect!
     assert_template 'maps/edit'
     @map.reload
     assert_equal title, @map.title
     assert_not @map.privacy_public
+    assert_equal blurb, @map.blurb
   end
 
   test "should redirect logged out user" do

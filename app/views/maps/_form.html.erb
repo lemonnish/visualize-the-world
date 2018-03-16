@@ -4,7 +4,7 @@
   <%= f.label :title %>
   <%= f.text_field :title, class: 'form-control' %>
 
-  <%= f.label :privacy_settings %>
+  <%= f.label :privacy_public, "Privacy settings" %>
   <div class='radio'>
     <div>
       <%= f.radio_button :privacy_public, 'true' %>
@@ -15,6 +15,9 @@
       <%= label :public_false, 'Private' %>
     </div>
   </div>
+
+  <%= f.label :blurb, "Map details" %>
+  <%= f.text_area :blurb, class: 'form-control' %>
 
   <div class="submit">
     <% @form_submit_names.each do |s| %>

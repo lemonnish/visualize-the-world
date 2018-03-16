@@ -45,5 +45,8 @@ class MapShowTest < ActionDispatch::IntegrationTest
       assert_match CGI.escapeHTML(content.comment), response.body
       assert_match CGI.escapeHTML(content.country_name), response.body
     end
+
+    assert @map.blurb
+    assert_match CGI.escapeHTML(@map.blurb), response.body
   end
 end
