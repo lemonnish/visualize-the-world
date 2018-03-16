@@ -19,7 +19,7 @@ main.map-show {
     width: 100%;
     height: auto;
     display: block;
-    .map-borders {
+    .map-borders, .map-outline {
       fill: none;
       stroke: $color-map-lines;
       stroke-width: .5px;
