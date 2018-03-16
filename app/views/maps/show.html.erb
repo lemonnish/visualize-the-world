@@ -9,6 +9,32 @@
 
 <svg id="world-map" width=900 height=450 viewBox="0 0 900 450"></svg>
 
+<div id="map-label">
+  <div id="labelDefault" class="countrySelected">
+    <p>Click on a country on the map to see data here.</p>
+  </div>
+  <% Map.country_codes.sort.each do |alpha_code| %>
+    <% country = ISO3166::Country.new(alpha_code) %>
+    <% name = Map.get_ext_name_from_country(country) %>
+    <% region = Map.get_region_name_from_country(country) %>
+    <div id='<%= "label-country-#{ country.number }"%>'>
+      <% name.each_with_index do |n, i| %>
+        <% if i == 0 %>
+          <h2><%= n %></h2>
+        <% else %>
+          <p><%= n %></p>
+        <% end %>
+      <% end %>
+      <ul>
+        <li>Continent: <%= country.continent %></li>
+        <% if !region.empty? %>
+          <li>Region: <%= region.join(" / ") %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+</div>
+
 <h2>Map content</h2>
 
 <% if @map.map_contents.count > 0 %>
@@ -24,15 +50,6 @@
 <% end %>
 
 
-<style>
-  <%= @map.get_selected_ids.join(", ") %> {
-    fill: darkred;
-  }
-  <%= @map.get_selected_ids.map{ |i| i + ":hover" }.join(", ") %> {
-    fill: red;
-  }
-</style>
-
 <script>
   var svg = d3.select('#world-map'),
       width = +svg.attr('width'),
@@ -41,10 +58,34 @@
     .fitSize([width, height], { type: "Sphere" });
   var geoPath = d3.geoPath()
     .projection(projection);
+
+  var toggleDisplayedCountry = function(id) {
+    var old_selected = d3.selectAll('.countrySelected');
+    var new_selected = d3.selectAll('#label-country-' + id + ', #country-' + id );
+    new_selected.classed('countrySelected', function(d) {
+      return !d3.select(this).classed('countrySelected')
+    });
+    old_selected.classed('countrySelected', false);
+    if(d3.select('.countrySelected').empty()) {
+      d3.select('#labelDefault').classed('countrySelected', true);
+    };
+  };
+
+  var isInContent = function(id) {
+    var mapContents = <%= "[" + @map.get_selected_nums.join(",") + "]" %>;
+    console.log(mapContents);
+    return (mapContents.indexOf(parseInt(id)) != -1);
+  };
+
   d3.json("https://unpkg.com/world-atlas@1/world/110m.json", function(error, world) {
     if (error) throw error;
     var countries = topojson.feature(world, world.objects.countries);
     var borders = topojson.mesh(world, world.objects.countries);
+
+    svg.insert('path')
+        .datum({ type: "Sphere" })
+        .attr("class", "map-background")
+        .attr("d", geoPath);
 
     svg.insert('path')
         .datum(d3.geoGraticule())
@@ -54,9 +95,11 @@
     svg.selectAll('path.country')
         .data(countries.features)
       .enter().append("path")
-        .attr("class", "map-country")
-        .attr("id", function(d) { return "country" + d.id; })
-        .attr("d", geoPath);
+        .classed("map-country", true)
+        .classed("map-content", function(d) { return isInContent(d.id) } )
+        .attr("id", function(d) { return "country-" + d.id; })
+        .attr("d", geoPath)
+        .on("click", function(d) { toggleDisplayedCountry(d.id) });
 
     svg.insert('path')
         .datum(borders)

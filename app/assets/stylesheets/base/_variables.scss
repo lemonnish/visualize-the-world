@@ -5,6 +5,7 @@ $pale-yellow: #ffecb3;
 $dark-yellow: #FF8E00;
 $blue: #1976d2;
 $light-blue: #4fc3f7;
+$teal: #00D6C0;
 
 // Basic dimensions
 $content-width: 900px;
@@ -17,6 +18,11 @@ $color-base-text: black;
 $color-accent: $yellow;
 $color-accent-light: $pale-yellow;
 $color-accent-dark: $dark-yellow;
+
+$color-contrast: $teal;
+$color-ocean: #EDFAFF;
+$color-ocean-lines: #A6E0F6;
+$color-map-lines: #263238;
 
 $color-link: $blue;
 $color-link-hover: $light-blue;

@@ -15,8 +15,8 @@
     <%= render 'shared/error_messages', object: f.object %>
 
     <%= f.label :country_code %>
-    <% country_array = @map.get_remaining_codes.map { |code|
-      [ Map.get_name_from_country_code(code), code ] } %>
+    <% country_array = @map.get_remaining_codes.map{ |code|
+      [ Map.get_name_from_country_code(code), code ] }.sort_by{ |e| e.first } %>
     <%= f.select :country_code, options_for_select(country_array) %>
 
     <%= f.text_area :comment, placeholder: "Write something here (optional)" %>

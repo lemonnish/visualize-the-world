@@ -23,11 +23,32 @@ class Map < ApplicationRecord
   # return the name and local country name based on the  alpha-2 country code
   def self.get_ext_name_from_country_code(string)
     country = ISO3166::Country.new(string)
-    name = country.name
+    Map.get_ext_name_from_country(country)
+  end
+
+  def self.get_ext_name_from_country(country)
+    name = [ country.name ]
+
     if local = country.local_name then
-      name = "#{ name } / #{ local }" if local != name
+      name.push(local) if !name.include?(local)
     end
+    
     return name
+  end
+
+  def self.get_region_name_from_country(country)
+    region_name = []
+    exclude_list = [country.continent]
+
+    if (region = country.region) && !region.blank? then
+      region_name.push(region) if !exclude_list.include?(region)
+      exclude_list.push(region)
+    end
+    if (subregion = country.subregion) && !subregion.blank? then
+      region_name.push(subregion) if !exclude_list.include?(subregion)
+    end
+
+    return region_name
   end
 
   # get the country num-3 code that matches the alpha-2 code
@@ -37,11 +58,15 @@ class Map < ApplicationRecord
 
   # returns an array of all SVG id's for selected countries
   def get_selected_ids
-    map_contents.all.map{ |m| "#country#{ Map.convert_country_code_alpha_to_num(m.country_code) }" }
+    map_contents.all.map{ |m| "#country-#{ Map.convert_country_code_alpha_to_num(m.country_code) }" }
   end
 
   def get_selected_codes
     map_contents.all.map{ |m| m.country_code }
+  end
+
+  def get_selected_nums
+    map_contents.all.map{ |m| Map.convert_country_code_alpha_to_num(m.country_code) }
   end
 
   # returns an array of all country_codes not currently in use
