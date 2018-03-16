@@ -1,10 +1,9 @@
 <svg id="world-map" width=900 height=450 viewBox="0 0 900 450"></svg>
 
 <select name="map-projection">
-  <option value="geoAirocean">Dymaxion</option>
-  <option value="geoNaturalEarth1">Natural Earth</option>
-  <option value="geoPolyhedralButterfly">Polyhedral butterfly</option>
-  <option value="geoBertin1953">Jacques Bertin: 1953</option>
+  <% Map.projections.each do |p| %>
+    <option value="<%= p[:d3] %>"><%= p[:name] %></option>
+  <% end %>
 </select>
 
 
