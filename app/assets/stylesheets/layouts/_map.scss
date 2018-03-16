@@ -15,69 +15,6 @@ main.map-show {
   table tr > * {
     text-align: left;
   }
-  svg {
-    width: 100%;
-    height: auto;
-    display: block;
-    .map-borders, .map-outline {
-      fill: none;
-      stroke: $color-map-lines;
-      stroke-width: .5px;
-    }
-    .map-background {
-      fill: $color-ocean;
-    }
-    .map-graticule {
-      fill: none;
-      stroke: $color-ocean-lines;
-      stroke-width: .5px;
-    }
-    .map-country {
-      fill: white;
-      stroke: none;
-    }
-    .map-country:hover {
-      fill: $color-accent;
-    }
-    .map-content {
-      fill: $color-contrast;
-    }
-    .countrySelected {
-      fill: $color-accent-dark;
-    }
-  }
-  #map-label {
-    margin: $base-unit * 2 0;
-    border: 2px solid $color-accent-dark;
-    padding: 0 $base-unit;
-    > div {
-      > p:first-child {
-        grid-column: 1 / span 2;
-      }
-      > * {
-        margin: 0;
-        display: block;
-      }
-      > h2 {
-        line-height: 1.2em;
-        grid-column: 1 / span 1;
-      }
-      > p:nth-child(n+2) {
-        grid-column: 1 / span 1;
-        margin-top: $base-unit / 2;
-      }
-      > ul {
-        grid-column: 2;
-        grid-row: 1 / span 4;
-      }
-      grid-template-columns: 1fr 1fr;
-      padding: $base-unit;
-      display: none;
-      &.countrySelected {
-        display: grid;
-      }
-    }
-  }
 }
 
 main.map-edit {
@@ -102,6 +39,71 @@ main.map-edit {
     }
     textarea {
       grid-row: span 2;
+    }
+  }
+}
+
+
+svg#world-map {
+  width: 100%;
+  height: auto;
+  display: block;
+  .map-borders, .map-outline {
+    fill: none;
+    stroke: $color-map-lines;
+    stroke-width: .5px;
+  }
+  .map-background {
+    fill: $color-ocean;
+  }
+  .map-graticule {
+    fill: none;
+    stroke: $color-ocean-lines;
+    stroke-width: .5px;
+  }
+  .map-country {
+    fill: white;
+    stroke: none;
+  }
+  .map-country:hover {
+    fill: $color-accent;
+  }
+  .map-content {
+    fill: $color-contrast;
+  }
+  .countrySelected {
+    fill: $color-accent-dark;
+  }
+}
+#map-label {
+  margin: $base-unit * 2 0;
+  border: 2px solid $color-accent-dark;
+  padding: 0 $base-unit;
+  > div {
+    > p:first-child {
+      grid-column: 1 / span 2;
+    }
+    > * {
+      margin: 0;
+      display: block;
+    }
+    > h2 {
+      line-height: 1.2em;
+      grid-column: 1 / span 1;
+    }
+    > p:nth-child(n+2) {
+      grid-column: 1 / span 1;
+      margin-top: $base-unit / 2;
+    }
+    > ul {
+      grid-column: 2;
+      grid-row: 1 / span 4;
+    }
+    grid-template-columns: 1fr 1fr;
+    padding: $base-unit;
+    display: none;
+    &.countrySelected {
+      display: grid;
     }
   }
 }

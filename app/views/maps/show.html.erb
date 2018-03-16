@@ -7,14 +7,7 @@
   <%= link_to "Edit map", edit_map_path(@map) %>
 <% end %>
 
-<select name="map-projection">
-  <option value="geoAirocean">Dymaxion</option>
-  <option value="geoNaturalEarth1">Natural Earth</option>
-  <option value="geoPolyhedralButterfly">Polyhedral butterfly</option>
-  <option value="geoBertin1953">Jacques Bertin: 1953</option>
-</select>
-
-<svg id="world-map" width=900 height=450 viewBox="0 0 900 450"></svg>
+<%= render 'maps/d3_map' %>
 
 <div id="map-label">
   <div id="labelDefault" class="countrySelected">
@@ -55,84 +48,3 @@
     <% end %>
   </table>
 <% end %>
-
-
-<script>
-
-  document.addEventListener('DOMContentLoaded',function() {
-    document.querySelector('select[name="map-projection"]').onchange=reloadMap;
-  },false);
-
-  function reloadMap(event) {
-    if (!event.target.value) alert('Please select one');
-
-    updateProjection(d3[event.target.value]());
-  }
-
-  function updateProjection(projection) {
-      projection.fitSize([width, height], { type: "Sphere" });
-
-      var geoPath = d3.geoPath()
-        .projection(projection);
-
-      svg.selectAll('path')
-          .attr('d', geoPath);
-  }
-
-  var svg = d3.select('#world-map'),
-      width = +svg.attr('width'),
-      height = +svg.attr('height');
-  var mapContents = [
-    <% @map.get_selected_nums.each do |n| %>
-      "<%= n %>",
-    <% end %>
-    ];
-
-  function toggleDisplayedCountry(id) {
-    var old_selected = d3.selectAll('.countrySelected');
-    var new_selected = d3.selectAll('#label-country-' + id + ', #country-' + id );
-    new_selected.classed('countrySelected', function(d) {
-      return !d3.select(this).classed('countrySelected')
-    });
-    old_selected.classed('countrySelected', false);
-    if(d3.select('.countrySelected').empty()) {
-      d3.select('#labelDefault').classed('countrySelected', true);
-    }
-  }
-
-  function isInContent(id) {
-    return (mapContents.indexOf(id) != -1);
-  }
-
-  d3.json("https://unpkg.com/world-atlas@1/world/110m.json", function(error, world) {
-    if (error) throw error;
-    var countries = topojson.feature(world, world.objects.countries);
-    var borders = topojson.mesh(world, world.objects.countries);
-
-    svg.insert('path')
-        .datum({ type: "Sphere" })
-        .attr("class", "map-background");
-
-    svg.insert('path')
-        .datum(d3.geoGraticule())
-        .attr("class", "map-graticule");
-
-    svg.selectAll('path.country')
-        .data(countries.features)
-      .enter().append("path")
-        .classed("map-country", true)
-        .classed("map-content", function(d) { return isInContent(d.id) } )
-        .attr("id", function(d) { return "country-" + d.id; })
-        .on("click", function(d) { toggleDisplayedCountry(d.id) });
-
-    svg.insert('path')
-        .datum(borders)
-        .attr("class", "map-borders");
-
-    svg.insert('path')
-        .datum({ type: "Sphere" })
-        .attr("class", "map-borders");
-
-    updateProjection(d3.geoAirocean());
-  })
-</script>
