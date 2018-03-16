@@ -1,16 +1,12 @@
 <svg id="world-map" width=900 height=450 viewBox="0 0 900 450"></svg>
 
-<select name="map-projection">
-  <% Map.projections.each do |p| %>
-    <option value="<%= p[:d3] %>"><%= p[:name] %></option>
-  <% end %>
-</select>
+<%= select(:map, :projection, Map.projections_array) %>
 
 
 <script>
 
   document.addEventListener('DOMContentLoaded',function() {
-    document.querySelector('select[name="map-projection"]').onchange=reloadMap;
+    document.querySelector('select[name="map[projection]"]').onchange=reloadMap;
   },false);
 
   function reloadMap(event) {
@@ -83,6 +79,6 @@
         .datum({ type: "Sphere" })
         .attr("class", "map-borders");
 
-    updateProjection(d3.geoAirocean());
+    updateProjection(d3['<%= @map.projection %>']());
   })
 </script>

@@ -16,6 +16,9 @@
     </div>
   </div>
 
+  <%= f.label :projection %>
+  <%= f.select :projection, Map.projections_array %>
+
   <%= f.label :blurb, "Map details" %>
   <%= f.text_area :blurb, class: 'form-control' %>
 

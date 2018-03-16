@@ -15,6 +15,12 @@ class Map < ApplicationRecord
       { d3: 'geoBertin1953', name: "Jacques Bertin: 1953" } ]
   end
 
+  # convert the array of valid projection hashes to an array of arrays
+  def self.projections_array
+    Map.projections.map{ |p| [ p[:name], p[:d3] ] }
+                   .sort_by{ |e| e.first }
+  end
+
   # returns an array of all valid country codes
   def self.country_codes
     ISO3166::Country.codes

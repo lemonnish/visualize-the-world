@@ -8,6 +8,7 @@ class MapEditTest < ActionDispatch::IntegrationTest
     @old_title = @map.title
     @old_privacy_public = @map.privacy_public
     @old_blurb = @map.blurb
+    @old_projection = @map.projection
   end
 
   test "unsuccessful map update" do
@@ -37,8 +38,9 @@ class MapEditTest < ActionDispatch::IntegrationTest
     log_in_as @user
     title = "Here's some fancy new title"
     blurb = "Here's something you didn't know about the map!"
+    projection = Map.projections[2][:d3]
     patch map_path(@map), params: { map: { title: title, privacy_public: false,
-                                           blurb: blurb } }
+                                           blurb: blurb, projection: projection } }
     assert_redirected_to edit_map_path(@map)
     follow_redirect!
     assert_template 'maps/edit'
@@ -46,6 +48,8 @@ class MapEditTest < ActionDispatch::IntegrationTest
     assert_equal title, @map.title
     assert_not @map.privacy_public
     assert_equal blurb, @map.blurb
+    assert_not_equal projection, @old_projection
+    assert_equal projection, @map.projection
   end
 
   test "should redirect logged out user" do
