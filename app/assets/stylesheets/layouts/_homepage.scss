@@ -26,10 +26,11 @@ main.home {
         background-color: $color-accent-light;
       }
     }
-    nav.not-maps {
+    nav.buttons {
       text-align: center;
       display: flex;
       justify-content: center;
+      margin: $base-unit * 2 0;
       > * {
         border: 2px solid $color-accent;
         border-right: none;
