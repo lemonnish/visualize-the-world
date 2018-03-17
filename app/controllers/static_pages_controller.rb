@@ -10,7 +10,7 @@ class StaticPagesController < ApplicationController
   end
 
   def example
-    @map = Map.find_by(title: "Example Map")
+    @map = Map.find_by(example_map: true)
     render 'maps/show' if !@map.nil?
   end
 

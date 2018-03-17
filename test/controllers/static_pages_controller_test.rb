@@ -19,9 +19,11 @@ class StaticPagesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should get example" do
+    example_map = maps(:example)
     get example_path
     assert_response :success
-    assert_select "title", full_title_t("Example Map")
+    assert_select "title", full_title_t(example_map.title)
+    assert_match CGI.escapeHTML(example_map.blurb), response.body
   end
 
   test "should get contact" do

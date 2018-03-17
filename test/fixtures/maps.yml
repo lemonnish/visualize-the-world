@@ -12,5 +12,12 @@ basic_private:
 
 taciturn:
   title: "I don't like to talk"
-  privacy_public: public
+  privacy_public: true
   user: lauren
+
+example:
+  title: "Example Map - test environment"
+  privacy_public: true
+  user: lauren
+  example_map: true
+  blurb: "This is the example map"

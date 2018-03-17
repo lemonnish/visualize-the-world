@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180316204225) do
+ActiveRecord::Schema.define(version: 20180316233329) do
 
   create_table "map_contents", force: :cascade do |t|
     t.string "country_code"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 20180316204225) do
     t.datetime "updated_at", null: false
     t.string "projection", default: "geoAirocean"
     t.text "blurb"
+    t.boolean "example_map", default: false
     t.index ["user_id", "updated_at"], name: "index_maps_on_user_id_and_updated_at"
     t.index ["user_id"], name: "index_maps_on_user_id"
   end

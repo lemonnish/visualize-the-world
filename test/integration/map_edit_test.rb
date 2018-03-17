@@ -52,6 +52,20 @@ class MapEditTest < ActionDispatch::IntegrationTest
     assert_equal projection, @map.projection
   end
 
+  test "should not be able to edit example_map from form" do
+    log_in_as @user
+    assert_not @map.example_map?
+    patch map_path(@map), params: { map: { example_map: true } }
+    @map.reload
+    assert_not @map.example_map?
+
+    example_map = maps(:example)
+    assert example_map.example_map?
+    patch map_path(example_map), params: { map: { example_map: false } }
+    example_map.reload
+    assert example_map.example_map?
+  end
+
   test "should redirect logged out user" do
     get edit_map_path(@map)
     assert_redirected_to login_path

@@ -6,6 +6,8 @@ class Map < ApplicationRecord
   validates :title, presence: true
   validates :projection, presence: true
   validate :exists_in_projection_list
+  validate :example_must_be_public
+  before_save :only_one_example_allowed
 
   # returns an array of all valid projections
   def self.projections
@@ -125,6 +127,21 @@ class Map < ApplicationRecord
       projection_list = Map.projections.map{ |p| p[:d3] }
       if !projection_list.include?(projection)
         errors.add(:projection, "is not in the list of allowed projections")
+      end
+    end
+
+    # Verify that an example map is public
+    def example_must_be_public
+      if self.example_map && !self.privacy_public
+        errors.add(:example_map, "must be publicly visible")
+      end
+    end
+
+    # Only allow one example map
+    def only_one_example_allowed
+      if example_map && (Map.where(example_map: true).count != 0)
+        errors.add(:example_map, "must be the only example")
+        throw :abort
       end
     end
 end
