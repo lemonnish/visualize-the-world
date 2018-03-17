@@ -11,7 +11,7 @@
 
 <div id="map-label">
   <div id="labelDefault" class="countrySelected">
-    <p>Click on a country on the map to see data here.</p>
+    <p>Click on a country to see data here.</p>
   </div>
   <% Map.country_codes.sort.each do |alpha_code| %>
     <% country = ISO3166::Country.new(alpha_code) %>
@@ -45,7 +45,9 @@
   <table>
     <tr><th>Country</th><th>Comment</th></tr>
     <% @map.map_contents.each do |content| %>
-      <tr>
+      <% num_code = Map.convert_country_code_alpha_to_num(content.country_code) %>
+      <tr id="content-country-<%= num_code %>"
+          onclick="toggleDisplayedCountry(<%= num_code %>)">
         <td><%= content.country_name %></td>
         <td><%= content.comment %></td>
       </tr>

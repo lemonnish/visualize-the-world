@@ -15,6 +15,9 @@ main.map-show {
   table tr > * {
     text-align: left;
   }
+  tr:not(:first-child):hover, tr.countrySelected {
+    background-color: $color-accent-light;
+  }
 }
 
 main.map-edit {

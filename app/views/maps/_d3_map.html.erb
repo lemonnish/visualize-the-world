@@ -36,7 +36,9 @@
 
   function toggleDisplayedCountry(id) {
     var old_selected = d3.selectAll('.countrySelected');
-    var new_selected = d3.selectAll('#label-country-' + id + ', #country-' + id );
+    var new_selected = d3.selectAll('#label-country-' + id +
+                                    ', #country-' + id +
+                                    ', #content-country-' + id );
     new_selected.classed('countrySelected', function(d) {
       return !d3.select(this).classed('countrySelected')
     });
