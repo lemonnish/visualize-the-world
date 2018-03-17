@@ -1,7 +1,9 @@
 <svg id="world-map" width=900 height=450 viewBox="0 0 900 450"></svg>
 
-<%= select(:map, :projection, Map.projections_array) %>
-
+<nav class="projection">
+  <%= label(:map, :projection, "Map projection:") %>
+  <%= select(:map, :projection, Map.projections_array) %>
+</nav>
 
 <script>
 
