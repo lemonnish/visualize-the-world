@@ -59,28 +59,42 @@
     var countries = topojson.feature(world, world.objects.countries);
     var borders = topojson.mesh(world, world.objects.countries);
 
-    svg.insert('path')
+    var defs = svg.append("defs");
+
+    defs.append("path")
         .datum({ type: "Sphere" })
+        .attr("id", "sphere");
+
+    defs.append("clipPath")
+        .attr("id", "clip")
+      .append("use")
+        .attr("xlink:href", "#sphere");
+
+    svg.append("use")
+        .attr("xlink:href", "#sphere")
         .attr("class", "map-background");
 
-    svg.insert('path')
+    svg.append('path')
         .datum(d3.geoGraticule())
-        .attr("class", "map-graticule");
+        .attr("class", "map-graticule")
+        .attr("clip-path", "url(#clip)");
 
     svg.selectAll('path.country')
         .data(countries.features)
       .enter().append("path")
+        .attr("clip-path", "url(#clip)")
         .classed("map-country", true)
         .classed("map-content", function(d) { return isInContent(d.id) } )
         .attr("id", function(d) { return "country-" + d.id; })
         .on("click", function(d) { toggleDisplayedCountry(d.id) });
 
-    svg.insert('path')
+    svg.append('path')
         .datum(borders)
-        .attr("class", "map-borders");
+        .attr("class", "map-borders")
+        .attr("clip-path", "url(#clip)");
 
-    svg.insert('path')
-        .datum({ type: "Sphere" })
+    svg.append("use")
+        .attr("xlink:href", "#sphere")
         .attr("class", "map-borders");
 
     updateProjection(d3['<%= @map.projection %>']());
