@@ -3,7 +3,7 @@ class StaticPagesController < ApplicationController
   def home
     @maps = current_user.nil? ? nil : current_user.maps
     @map = Map.new
-    @map.projection = Map.projections.keys.sample.to_s
+    @map.projection = "geoNaturalEarth1"
   end
 
   def about
