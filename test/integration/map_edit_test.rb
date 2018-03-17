@@ -38,7 +38,7 @@ class MapEditTest < ActionDispatch::IntegrationTest
     log_in_as @user
     title = "Here's some fancy new title"
     blurb = "Here's something you didn't know about the map!"
-    projection = Map.projections[2][:d3]
+    projection = Map.projections.keys[2].to_s
     patch map_path(@map), params: { map: { title: title, privacy_public: false,
                                            blurb: blurb, projection: projection } }
     assert_redirected_to edit_map_path(@map)

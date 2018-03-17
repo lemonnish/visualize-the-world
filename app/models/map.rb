@@ -7,20 +7,20 @@ class Map < ApplicationRecord
   validates :projection, presence: true
   validate :exists_in_projection_list
   validate :example_must_be_public
-  before_save :only_one_example_allowed
+  before_create :only_one_example_allowed
 
   # returns an array of all valid projections
   def self.projections
-    [ { d3: 'geoAirocean', name: "Dymaxion" },
-      { d3: 'geoNaturalEarth1', name: "Natural Earth" },
-      { d3: 'geoPolyhedralButterfly', name: "Polyhedral butterfly" },
-      { d3: 'geoBertin1953', name: "Jacques Bertin: 1953" },
-      { d3: 'geoConicEqualArea', name: "Conic equal-area" } ]
+    { geoAirocean: "Dymaxion",
+      geoNaturalEarth1: "Natural Earth",
+      geoPolyhedralButterfly: "Polyhedral butterfly",
+      geoBertin1953: "Jacques Bertin: 1953",
+      geoConicEqualArea: "Conic equal-area" }
   end
 
   # convert the array of valid projection hashes to an array of arrays
   def self.projections_array
-    Map.projections.map{ |p| [ p[:name], p[:d3] ] }
+    Map.projections.map{ |d3, name| [ name, d3.to_s ] }
                    .sort_by{ |e| e.first }
   end
 
@@ -124,7 +124,7 @@ class Map < ApplicationRecord
     # Verify that the projection is in the
     # list of allowed projections
     def exists_in_projection_list
-      projection_list = Map.projections.map{ |p| p[:d3] }
+      projection_list = Map.projections.keys.map{ |k| k.to_s }
       if !projection_list.include?(projection)
         errors.add(:projection, "is not in the list of allowed projections")
       end
@@ -139,6 +139,7 @@ class Map < ApplicationRecord
 
     # Only allow one example map
     def only_one_example_allowed
+
       if example_map && (Map.where(example_map: true).count != 0)
         errors.add(:example_map, "must be the only example")
         throw :abort
