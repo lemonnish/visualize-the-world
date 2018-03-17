@@ -4,9 +4,7 @@
     <title><%= full_title(yield(:title)) %></title>
     <%= render 'layouts/rails_default' %>
     <%= render 'layouts/shim' %>
-    <% if yield(:class) == "map-show" || yield(:class).include?("home") %>
-      <%= render 'layouts/d3_map_scripts' %>
-    <% end %>
+    <%= render 'layouts/d3_map_scripts' %>
   </head>
 
   <body>

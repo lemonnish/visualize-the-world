@@ -14,12 +14,14 @@
   <%= form_for(@new_content, url:map_contents_path(@map)) do |f| %>
     <%= render 'shared/error_messages', object: f.object %>
 
-    <%= f.label :country_code %>
-    <% country_array = @map.get_remaining_codes.map{ |code|
-      [ Map.get_name_from_country_code(code), code ] }.sort_by{ |e| e.first } %>
-    <%= f.select :country_code, options_for_select(country_array) %>
+    <section>
+      <%= f.label :country_code %>
+      <% country_array = @map.get_remaining_codes.map{ |code|
+        [ Map.get_name_from_country_code(code), code ] }.sort_by{ |e| e.first } %>
+      <%= f.select :country_code, options_for_select(country_array) %>
 
-    <%= f.text_area :comment, placeholder: "Write something here (optional)" %>
+      <%= f.text_area :comment, placeholder: "Write something here (optional)" %>
+    </section>
 
     <div class="submit">
       <%= f.submit "Cancel" %>
@@ -35,9 +37,11 @@
 
     <% @map.map_contents.each do |content| %>
       <% field = "comment_#{ content.country_code }".to_sym %>
-      <%= f.label field, content.country_name %>
-      <%= f.text_area field %>
-      <%= link_to "delete", map_content_path(@map, content), method: :delete %>
+      <section>
+        <%= f.label field, content.country_name %>
+        <%= link_to "delete", map_content_path(@map, content), method: :delete %>
+        <%= f.text_area field %>
+      </section>
     <% end %>
 
     <div class="submit">

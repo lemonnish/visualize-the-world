@@ -1,4 +1,4 @@
-form {
+form, form > section {
   justify-content: center;
   display: grid;
   grid-template-columns: [full-start]
@@ -6,15 +6,18 @@ form {
   grid-column-gap: $base-unit;
   grid-row-gap: $base-unit / 2;
 
+  input, textarea {
+    border: 1px solid $color-form-border;
+    padding: 0 $base-unit / 4;
+    width: 100%;
+    line-height: 1.3em;
+  }
+
   & > *, div.field_with_errors > * {
     display: block;
   }
   label {
     text-align: right;
-  }
-  input {
-    width: 100%;
-    padding: 0 $base-unit / 4;
   }
 
   > input[type=submit], div.submit {
@@ -56,4 +59,15 @@ form {
       width: auto;
     }
   }
+
+  textarea {
+    height: 150px;
+  }
+}
+
+form > section {
+  grid-column: full;
+  min-height: 120px;
+  grid-template-rows: min-content 1fr;
+  grid-row-gap: 0;
 }

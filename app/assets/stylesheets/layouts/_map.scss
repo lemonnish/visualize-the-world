@@ -23,25 +23,30 @@ main.map-show {
 main.map-edit {
   form.new_map_content {
     grid-auto-flow: column dense;
-    > label, > div.field_with_errors > label, > input {
+    min-height: 100px;
+    grid-template-rows: min-content 1fr;
+    label, select {
       text-align: left;
       grid-column: 1;
     }
     textarea {
-      grid-row: span 2;
+      grid-row: 1 / span 2;
       grid-column: 2;
+      height: inherit;
     }
   }
   form.edit_map_contents {
-    > label {
+    label {
       text-align: left;
     }
-    > a {
+    a {
       display: block;
       grid-column: 1;
     }
     textarea {
-      grid-row: span 2;
+      grid-column: 2;
+      grid-row: 1 / span 2;
+      height: inherit;
     }
   }
 }
