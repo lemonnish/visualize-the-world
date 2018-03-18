@@ -22,15 +22,17 @@ main.map-show {
 
 main.map-edit {
   form.new_map_content {
-    grid-auto-flow: column dense;
-    min-height: 100px;
-    grid-template-rows: min-content 1fr;
+    section {
+      grid-auto-flow: row dense;
+      min-height: 100px;
+      grid-template-rows: min-content 1fr;
+    }
     label, select {
       text-align: left;
       grid-column: 1;
     }
     textarea {
-      grid-row: 1 / span 2;
+      grid-row: span 2;
       grid-column: 2;
       height: inherit;
     }
@@ -47,6 +49,34 @@ main.map-edit {
       grid-column: 2;
       grid-row: 1 / span 2;
       height: inherit;
+    }
+  }
+}
+
+@media (max-width: $media-toggle) {
+  main.map-edit {
+    form.edit_map_contents {
+      grid-row-gap: $base-unit * 2;
+    }
+    form.edit_map {
+      > input, > div.radio, > select {
+        margin-bottom: $base-unit;
+      }
+    }
+    form > section {
+      min-height: 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      textarea {
+        margin-top: $base-unit / 2;
+        width: 100%;
+        min-height: 120px;
+      }
+      label, a {
+        width: auto;
+        display: block;
+      }
     }
   }
 }

@@ -71,3 +71,13 @@ form > section {
   grid-template-rows: min-content 1fr;
   grid-row-gap: 0;
 }
+
+@media (max-width: $media-toggle) {
+  form, form > section {
+    label, textarea, div.radio, select, > input {
+      grid-column: full;
+      text-align: left;
+      width: 100%;
+    }
+  }
+}

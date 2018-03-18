@@ -2,7 +2,7 @@
 
 main.home {
   &.login {
-    nav {
+    nav:not(.projection) {
       margin: 0 auto;
       > * {
         display: block;

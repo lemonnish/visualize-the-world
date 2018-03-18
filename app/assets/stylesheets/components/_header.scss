@@ -8,12 +8,15 @@ header {
     display: block;
     grid-column: 2 / span 4;
     margin: 0;
+    padding: 0 $base-unit / 2;
     font-family: $font-family-title;
     font-weight: bold;
     justify-self: start;
     align-self: end;
+    @extend %color-box-link;
     a {
-      padding: 0 $base-unit / 2;
+      display: block;
+      padding: 0;
       @extend %color-box-link;
     }
   }

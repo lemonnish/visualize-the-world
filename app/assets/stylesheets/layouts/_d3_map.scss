@@ -71,3 +71,12 @@ svg#world-map {
     }
   }
 }
+
+@media (max-width: $media-toggle) {
+  nav.projection {
+    > * {
+      margin: 0;
+      display: block;
+    }
+  }
+}
