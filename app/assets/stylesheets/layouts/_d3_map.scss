@@ -69,6 +69,16 @@ svg#world-map {
     &.countrySelected {
       display: grid;
     }
+    @media (max-width: $media-toggle) {
+      &.countrySelected {
+        display: block;
+        width: 100%;
+        padding: $base-unit 0;
+        ul {
+          padding-left: $base-unit * 2;
+        }
+      }
+    }
   }
 }
 
@@ -76,6 +86,7 @@ svg#world-map {
   nav.projection {
     > * {
       margin: 0;
+      width: 100%;
       display: block;
     }
   }
