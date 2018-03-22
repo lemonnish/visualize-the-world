@@ -1,4 +1,5 @@
-<svg id="world-map" width=900 height=450 viewBox="0 0 900 450"></svg>
+<svg id="world-map" viewBox="0 0 900 450"
+  preserveAspectRatio="xMidYMid meet"></svg>
 
 <nav class="projection">
   <%= label(:map, :projection, "Map projection:") %>
@@ -28,8 +29,10 @@
   }
 
   var svg = d3.select('#world-map'),
-      width = +svg.attr('width'),
-      height = +svg.attr('height');
+      viewBox = svg.attr('viewBox').toString().split(' '),
+      width = +viewBox[2],
+      height = +viewBox[3];
+      
   var mapContents = [
     <% @map.get_selected_nums.each do |n| %>
       "<%= n %>",
