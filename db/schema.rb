@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180316233329) do
+ActiveRecord::Schema.define(version: 20180326000500) do
 
   create_table "map_contents", force: :cascade do |t|
     t.string "country_code"
@@ -40,6 +40,9 @@ ActiveRecord::Schema.define(version: 20180316233329) do
     t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "activation_digest"
+    t.boolean "activated", default: false
+    t.datetime "activated_at"
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
