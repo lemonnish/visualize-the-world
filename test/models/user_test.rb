@@ -71,8 +71,9 @@ class UserTest < ActiveSupport::TestCase
 
   test "activation token and digest should be generated" do
     @user.save
+    @user.reload
     assert @user.activation_token
     assert @user.activation_digest
-    assert @user.authenticated?(:activation, @user.activation_digest)
+    assert @user.authenticated?(:activation, @user.activation_token)
   end
 end
