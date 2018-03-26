@@ -21,3 +21,6 @@
 /yarn-error.log
 
 .byebug_history
+
+# Ignore sensitive environment variables
+/config/initializers/environment_variables.rb
