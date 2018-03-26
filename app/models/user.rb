@@ -30,6 +30,11 @@ class User < ApplicationRecord
     BCrypt::Password.new(digest).is_password?(token)
   end
 
+  # Activates a user
+  def activate
+    update_columns(activated: true, activated_at: Time.zone.now)
+  end
+
   private
 
     # save emails as lowercase

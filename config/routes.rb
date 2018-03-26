@@ -14,4 +14,5 @@ Rails.application.routes.draw do
     resources :map_contents, only: [:create, :destroy],
                              as: 'contents'
   end
+  resources :account_activations, only: [:edit]
 end
