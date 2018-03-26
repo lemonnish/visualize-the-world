@@ -1,6 +1,8 @@
 User.create!(email: "map@laurennishizaki.com",
              password:              "foobar",
-             password_confirmation: "foobar")
+             password_confirmation: "foobar",
+             activated: true,
+             activated_at: Time.zone.now)
 
 user = User.find_by(email: "map@laurennishizaki.com")
 
