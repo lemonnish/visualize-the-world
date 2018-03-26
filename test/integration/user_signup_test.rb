@@ -16,13 +16,31 @@ class SignupTest < ActionDispatch::IntegrationTest
     assert_select 'div.field_with_errors', 6
   end
 
-  test "valid signup" do
+  test "valid signup with account activation" do
     get signup_path
     assert_difference 'User.count', 1 do
       post signup_path, params: { user: { email: "user@example.com",
                                           password: "password",
                                           password_confirmation: "password" } }
     end
+    user = assigns(:user)
+    assert_not user.activated?
+    follow_redirect!
+    assert_template 'static_pages/home'
+    assert_not flash.empty?
+    assert_not logged_in?
+    # try to log in before activation
+    log_in_as(user)
+    assert_not logged_in?
+    # invalid activation token, valid email
+    get edit_account_activation_path("invalid token", email: user.email)
+    assert_not logged_in?
+    # valid token, invalid email
+    get edit_account_activation_path(user.activation_token, email: "wrongEmail")
+    assert_not logged_in?
+    # valid activation token
+    get edit_account_activation_path(user.activation_token, email: user.email)
+    assert user.reload.activated?
     follow_redirect!
     assert_template 'static_pages/home'
     assert_not flash.empty?
