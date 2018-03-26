@@ -68,4 +68,11 @@ class UserTest < ActiveSupport::TestCase
     @user.password_confirmation = "foobaz"
     assert_not @user.valid?
   end
+
+  test "activation token and digest should be generated" do
+    @user.save
+    assert @user.activation_token
+    assert @user.activation_digest
+    assert @user.authenticated?(:activation, @user.activation_digest)
+  end
 end
