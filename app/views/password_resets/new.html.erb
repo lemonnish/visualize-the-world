@@ -2,9 +2,10 @@
 
 <h1>Forgot password</h1>
 
-<%= form_for(:password_reset, url: password_resets_path) do |f| %>
+<%= form_for(:password_reset, url: password_resets_path,
+                              html: { class: "skinny" }) do |f| %>
   <%= f.label :email %>
   <%= f.email_field :email, class: 'form-control' %>
 
-  <% f.submit "Send reset email" %>
+  <%= f.submit "Send reset email" %>
 <% end %>

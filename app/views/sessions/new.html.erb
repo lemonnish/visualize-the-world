@@ -3,7 +3,7 @@
 
 <h1>Log in</h1>
 
-<%= form_for(:session, url:login_path) do |f| %>
+<%= form_for(:session, url:login_path, html: { class: "skinny" }) do |f| %>
   <%= f.label :email %>
   <%= f.email_field :email, class: 'form-control' %>
 

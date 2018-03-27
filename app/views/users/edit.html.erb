@@ -2,7 +2,8 @@
 
 <h1>Edit account settings</h1>
 
-<%= form_for(@user, url:user_path) do |f| %>
+<%= form_for(@user, url:user_path,
+                    html: { class: "skinny" }) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
 
   <%= f.label :email %>
@@ -17,5 +18,5 @@
   <%= f.label :password_confirmation %>
   <%= f.password_field :password_confirmation, class: 'form-control' %>
 
-  <%= f.submit "Save Changes" %>
+  <%= f.submit "Save changes" %>
 <% end %>

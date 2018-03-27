@@ -2,7 +2,7 @@ form, form > section {
   justify-content: center;
   display: grid;
   grid-template-columns: [full-start]
-    minmax(0, 200px) minmax(0, 400px) [full-end];
+    150px minmax(0, 550px) [full-end];
   grid-column-gap: $base-unit;
   grid-row-gap: $base-unit / 2;
 
@@ -70,6 +70,11 @@ form > section {
   min-height: 120px;
   grid-template-rows: min-content 1fr;
   grid-row-gap: 0;
+}
+
+form.skinny, form.skinny > section {
+  grid-template-columns: [full-start]
+    200px minmax(0, 350px) [full-end];
 }
 
 @media (max-width: $media-toggle) {
