@@ -25,7 +25,7 @@ class PasswordResetsTest < ActionDispatch::IntegrationTest
     assert_not_equal @user.reset_digest, @user.reload.reset_digest
     assert_equal 1, ActionMailer::Base.deliveries.size
     assert_not flash.empty?
-    asssert_redirected_to root_url
+    assert_redirected_to root_url
 
     # password reset form
     user = assigns(:user)
@@ -63,13 +63,13 @@ class PasswordResetsTest < ActionDispatch::IntegrationTest
           params: { email: user.email,
                     user: { password:              "foobaz",
                             password_confirmation: "foobaz" } }
-    assert is_logged_in?
+    assert logged_in?
     assert_not flash.empty?
-    assert_redirected_to user
+    assert_redirected_to root_path
 
     # Deleted reset_digest after successful reset
     assert_nil user.reload.reset_digest
-    assert user.reload.validate("foobaz")
+    assert user.reload.authenticate("foobaz")
   end
 
   test "expired token" do
