@@ -11,3 +11,27 @@ main.user_show {
     text-align: center;
   }
 }
+
+main.user_login {
+  form > section {
+    height: inherit;
+    min-height: inherit;
+    span {
+      text-align: right;
+      grid-row: 2;
+    }
+    @media (max-width: $media-toggle) {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      label, span {
+        text-align: left;
+        display: block;
+        width: auto;
+      }
+      input {
+        width: 100%;
+      }
+    }
+  }
+}

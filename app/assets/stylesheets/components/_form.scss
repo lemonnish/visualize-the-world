@@ -74,7 +74,7 @@ form > section {
 
 @media (max-width: $media-toggle) {
   form, form > section {
-    label, textarea, div.radio, select, > input {
+    label, textarea, div.radio, select, > input:not([type=submit]) {
       grid-column: full;
       text-align: left;
       width: 100%;
