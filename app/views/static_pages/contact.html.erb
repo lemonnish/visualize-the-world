@@ -2,4 +2,21 @@
 
 <h1>Contact</h1>
 
-<p>Coming soon!</p>
+<%= form_for(@message, url: contact_path) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+
+  <%= f.label :name %>
+  <%= f.text_field :name, class: 'form-control' %>
+
+  <%= f.label :email %>
+  <%= f.email_field :email, class: 'form-control' %>
+
+  <%= f.label :subject %>
+  <%= f.text_field :subject, class: 'form-control' %>
+
+  <%= f.label :body, "Message" %>
+  <%= f.text_area :body, class: 'form-control' %>
+
+  <%= f.submit "Send message" %>
+
+<% end %>

@@ -9,4 +9,11 @@ class UserMailer < ApplicationMailer
     @user = user
     mail to: user.email, subject: "Password reset"
   end
+
+  def contact(message)
+    @message = message
+    mail to: ENV['PERSONAL_EMAIL'],
+         from: "#{ @message.name } <#{ @message.email }>",
+         subject: "[Visualize the World] #{ @message.subject }"
+  end
 end

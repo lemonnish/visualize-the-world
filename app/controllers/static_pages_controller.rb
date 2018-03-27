@@ -15,5 +15,23 @@ class StaticPagesController < ApplicationController
   end
 
   def contact
+    @message = Message.new
   end
+
+  def contact_submit
+    @message = Message.new(message_params)
+    if @message.valid?
+      @message.send_contact_email
+      flash[:info] = "Message sent!"
+      redirect_to root_url
+    else
+      render 'contact'
+    end
+  end
+
+  private
+
+    def message_params
+      params.require(:message).permit(:name, :email, :subject, :body)
+    end
 end
