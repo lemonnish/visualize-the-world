@@ -40,6 +40,9 @@ main.home {
         background-color: $color-accent-light;
       }
     }
+    nav.buttons:first-child {
+      margin-top: 0;
+    }
   }
   &.logout {
     ul {
