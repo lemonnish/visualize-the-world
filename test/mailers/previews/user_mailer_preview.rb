@@ -16,10 +16,14 @@ class UserMailerPreview < ActionMailer::Preview
   end
 
   def contact
+    body = "Here's a message. Heck, it even has line breaks.
+    Like I said, that was a single line break.
+
+    Shall we make it 2?"
     message = Message.new(name: "Lauren Nishizaki",
                           email: "map@laurennishizaki.com",
                           subject: "Here's a contact form submission",
-                          body: "And now the body of the message...")
+                          body: body)
     UserMailer.contact(message)
   end
 end
