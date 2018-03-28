@@ -1,4 +1,5 @@
 class UserMailer < ApplicationMailer
+  before_action :define_css
 
   def account_activation(user)
     @user = user
@@ -22,5 +23,10 @@ class UserMailer < ApplicationMailer
     # generate the full subject of all emails
     def full_subject(title)
       "[Visualize the World] #{ title }"
+    end
+
+    # load the CSS
+    def define_css
+      @css = Rails.application.assets["mailer.css"].to_s.html_safe
     end
 end
