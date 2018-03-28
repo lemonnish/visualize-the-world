@@ -58,6 +58,10 @@ main.home {
         &:last-of-type {
           margin-top: $base-unit;
         }
+        @media (max-width: $media-toggle) {
+          font-size: 1.2 * $base-unit;
+          line-height: 1.6 * $base-unit;
+        }
       }
     }
   }
