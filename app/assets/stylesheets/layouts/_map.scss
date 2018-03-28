@@ -18,6 +18,24 @@ main.map-show {
   tr:not(:first-child):hover, tr.countrySelected {
     background-color: $color-accent-light;
   }
+  td {
+    padding: $base-unit;
+    &:first-child {
+      margin-top: 0;
+    }
+    &:last-child {
+      margin-bottom: 0;
+    }
+    > p {
+      margin: 0;
+      &:not(:first-child) {
+        margin-top: $base-unit;
+      }
+      &:not(:last-child) {
+        margin-bottom: $base-unit;
+      }
+    }
+  }
 }
 
 main.map-edit {

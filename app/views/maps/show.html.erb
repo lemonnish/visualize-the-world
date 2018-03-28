@@ -36,7 +36,7 @@
 </div>
 
 <% if !@map.blurb.blank? %>
-  <p><%= @map.blurb %></p>
+  <p><%= simple_format(@map.blurb) %></p>
 <% end %>
 
 <h2>Map content</h2>
@@ -49,7 +49,7 @@
       <tr id="content-country-<%= num_code %>"
           onclick="toggleDisplayedCountry(<%= num_code %>)">
         <td><%= content.country_name %></td>
-        <td><%= content.comment %></td>
+        <td><%= simple_format(content.comment) %></td>
       </tr>
     <% end %>
   </table>
