@@ -48,6 +48,7 @@ main.map-edit {
     label, select {
       text-align: left;
       grid-column: 1;
+      align-self: start;
     }
     textarea {
       grid-row: span 2;

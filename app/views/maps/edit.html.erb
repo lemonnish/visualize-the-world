@@ -15,7 +15,7 @@
     <%= render 'shared/error_messages', object: f.object %>
 
     <section>
-      <%= f.label :country_code %>
+      <%= f.label :country_code, "Country" %>
       <% country_array = @map.get_remaining_codes.map{ |code|
         [ Map.get_name_from_country_code(code), code ] }.sort_by{ |e| e.first } %>
       <%= f.select :country_code, options_for_select(country_array) %>
@@ -35,7 +35,7 @@
                      as: :map_content, html: { class:"edit_map_contents" }) do |f| %>
     <%= render 'shared/error_messages', object: f.object %>
 
-    <% @map.map_contents.each do |content| %>
+    <% @map.map_contents.sort_by{ |i| i.country_name }.each do |content| %>
       <% field = "comment_#{ content.country_code }".to_sym %>
       <section>
         <%= f.label field, content.country_name %>

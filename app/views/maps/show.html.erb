@@ -44,7 +44,7 @@
 <% if @map.map_contents.count > 0 %>
   <table>
     <tr><th>Country</th><th>Comment</th></tr>
-    <% @map.map_contents.each do |content| %>
+    <% @map.map_contents.sort_by{ |i| i.country_name }.each do |content| %>
       <% num_code = Map.convert_country_code_alpha_to_num(content.country_code) %>
       <tr id="content-country-<%= num_code %>"
           onclick="toggleDisplayedCountry(<%= num_code %>)">
