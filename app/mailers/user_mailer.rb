@@ -27,11 +27,7 @@ class UserMailer < ApplicationMailer
 
     # load the CSS
     def define_css
-      if Rails.env.production?
-        @css = Rails.application.assets_manifest
-                    .find_sources('mailer.css').first.to_s.html_safe
-      else
-        @css = Rails.application.assets["mailer.css"].to_s.html_safe
-      end
+      @css = Rails.application.assets_manifest
+                  .find_sources('mailer.css').first.to_s.html_safe
     end
 end
