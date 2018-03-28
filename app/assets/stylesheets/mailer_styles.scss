@@ -1,0 +1,58 @@
+@import 'base/variables';
+@import 'base/typography';
+
+// Typography defaults
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-family-body;
+  font-weight: bold;
+}
+p, h1, h2, h3, h4, h5, h6, aside, blockquote, ul, ol, pre, table {
+  margin-top: $base-unit;
+  margin-bottom: $base-unit;
+}
+ul, ol {
+  ul, ol, li {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+
+// Mail component styling
+
+header, div.mailer, footer {
+  max-width: $email-content-width;
+  margin: 0 auto;
+}
+
+header {
+  padding: 0;
+  border-bottom: 1px solid $color-accent;
+  font-family: $font-family-title;
+  text-align: center;
+  h1 {
+    margin: $base-unit 0;
+  }
+}
+
+div.mailer {
+  padding: $base-unit * 2 0;
+  > a {
+    display: block;
+    margin: $base-unit 0;
+  }
+}
+footer {
+  padding: $base-unit 0 0;
+  border-top: $base-unit solid $color-accent-light;
+  > * {
+    display: block;
+    text-align: center;
+  }
+  div.links a {
+    padding: 0 $base-unit / 2;
+  }
+  > p {
+    font-size: 0.8em;
+  }
+}

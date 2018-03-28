@@ -1,13 +1,28 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,700|Permanent+Marker" rel="stylesheet">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <style>
-      /* Email styles need to be inline */
+      <%= MapApp::Application.assets["mailer.css"].to_s.html_safe %>
     </style>
   </head>
 
   <body>
-    <%= yield %>
+    <header>
+      <h1>Visualize the World</h1>
+    </header>
+
+    <div class="mailer">
+      <%= yield %>
+    </div>
+
+    <footer>
+      <div class="links">
+        <%= link_to "Home", root_url %>
+        <%= link_to "About", about_url %>
+      </div>
+      <p>© <%= Date.current.year %> Lauren Nishizaki. All rights reserved.
+    </footer>
   </body>
 </html>

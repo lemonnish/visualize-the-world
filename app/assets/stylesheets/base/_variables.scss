@@ -37,5 +37,8 @@ $color-warning: $red;
 
 // Fonts
 $font-family-body: 'Open Sans', sans-serif;
-$font-family-header: 'BioRhyme', serif;
-$font-family-title: 'Permanent Marker', cursive;
+$font-family-header: 'BioRhyme', 'Open Sans', serif;
+$font-family-title: 'Permanent Marker', 'Open Sans', sans-serif;
+
+// Email
+$email-content-width: 700px;
