@@ -77,7 +77,7 @@ svg#world-map {
         ul {
           padding-left: $base-unit * 2;
         }
-        p {
+        p:nth-child(n+2) {
           margin: $base-unit / 2 0 $base-unit;
         }
       }
