@@ -1,0 +1,15 @@
+main.error {
+  border: $base-unit / 3 solid $color-accent-dark;
+  border-radius: $base-unit * 2;
+  padding: $base-unit * 3;
+  margin: $base-unit * 5 auto;
+  max-width: 700px;
+  width: 100%;
+  text-align: center;
+  h1 {
+    margin: 0 0 $base-unit;
+  }
+  p {
+    margin: $base-unit / 2 0 0;
+  }
+}
