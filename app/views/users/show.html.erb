@@ -10,3 +10,6 @@
 </table>
 
 <%= link_to "Edit account settings", edit_user_path %>
+
+<%= link_to "Delete account", user_path, method: :delete,
+    data: { confirm: "Are you sure? Deleting an account is permanent." } %>

@@ -78,7 +78,7 @@ class UserEditTest < ActionDispatch::IntegrationTest
   test "destroy user" do
     log_in_as(@user)
     get user_path
-    assert_select "a[href=?]", user_path, text: 'delete'
+    assert_select 'a[href=?]', user_path, text: 'Delete account'
     assert_difference 'User.count', -1 do
       delete user_path
     end

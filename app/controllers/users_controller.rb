@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: [:show, :edit, :update]
+  before_action :logged_in_user, only: [:show, :edit, :update, :destroy]
+  before_action :get_current_user, only: [:show, :edit, :update, :destroy]
 
   def new
     @user = User.new
@@ -17,15 +18,12 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = current_user
   end
 
   def edit
-    @user = current_user
   end
 
   def update
-    @user = current_user
     old_password = params[:user][:old_password]
     if @user.authenticate(old_password)
       if @user.update_attributes(user_params)
@@ -45,7 +43,18 @@ class UsersController < ApplicationController
     end
   end
 
+  def destroy
+    log_out
+    @user.destroy
+    flash[:success] = "Account successfully deleted."
+    redirect_to root_path
+  end
+
   private
+
+    def get_current_user
+      @user = current_user
+    end
 
     def user_params
       params.require(:user).permit(:email, :password, :password_confirmation)
