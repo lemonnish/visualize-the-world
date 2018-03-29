@@ -75,4 +75,16 @@ class UserEditTest < ActionDispatch::IntegrationTest
     assert_redirected_to login_path
   end
 
+  test "destroy user" do
+    log_in_as(@user)
+    get user_path
+    assert_select "a[href=?]", user_path, text: 'delete'
+    assert_difference 'User.count', -1 do
+      delete user_path
+    end
+    assert_redirected_to root_path
+    follow_redirect!
+    assert_not flash.empty?
+    assert_not logged_in?
+  end
 end
