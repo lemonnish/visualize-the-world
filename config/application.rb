@@ -17,5 +17,9 @@ module MapApp
 
     # Use custom error pages
     config.exceptions_app = self.routes
+
+    # Set defaults for sanitizing user-entered values
+    config.action_view.sanitized_allowed_tags = ['strong', 'em']
+    config.action_view.sanitized_allowed_attributes = []
   end
 end
