@@ -6,9 +6,17 @@ main.user_show {
       text-align: right;
     }
   }
-  a {
+  > a {
     display: block;
+    max-width: 400px;
+    width: max-content;
     text-align: center;
+    margin: $base-unit * 2 auto $base-unit * 4;
+  }
+  > a:last-child {
+    padding: $base-unit $base-unit * 2 0;
+    margin-bottom: 0;
+    border-top: 2px solid $color-accent-light;
   }
 }
 
