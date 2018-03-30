@@ -1,4 +1,5 @@
 <% provide(:title, "About") %>
+<% provide(:class, "about") %>
 
 <h1>About</h1>
 <p>This project was born from a desire to fulfill two goals:</p>
@@ -22,5 +23,81 @@
 </p>
 <p>
   This project would not exist without Michael Hartl’s Ruby on Rails Tutorial
-  and Mike Bostock’s mapping contributions to the D3 community.
+  and Mike Bostock’s work on D3.
 </p>
+
+<h2>Map projections</h2>
+
+<p>
+  Because the earth is round, any attempt to display it on a 2D surface will
+  introduce distortions. Every map contains distortions, whether those
+  distortions affect area, distance, shape, or cardinal directions.
+</p>
+<p>
+  The Mercator projection can be found everywhere, yet it is notorious for
+  heavily distorting areas closer to the north and south poles.
+  Here is a list of some realizations I had after examining different map
+  projections:
+</p>
+<ul>
+  <li>Brazil is larger than the continental US.</li>
+  <li>Australia is more than three times larger than Greenland.</li>
+  <li>Africa is 20% larger than the entire North American continent
+    (which includes Greenland).</li>
+</ul>
+<p>
+  I chose unfamiliar map projections for this project to combat widspread
+  misconceptions about geography. Every map has its pros and cons, and no single
+  map is suitable for all purposes. But taken together, they provide a more
+  nuanced understanding of our world's geography.
+</p>
+<ul>
+  <li><strong>Buckminster Fuller's Dymaxion:</strong> This projection can be folded up into
+    a 20-sided polygon. Because most of the cuts are located in the oceans, it
+    can be used to show just how close neighboring continents are.
+    The many cuts also minimize the distortion of large land masses.
+  </li>
+  <li><strong>Contic equal-area:</strong> Distances and shapes are distorted,
+    but the overall area of all countries is preserved.
+  </li>
+  <li><strong>Interrupted Mollweide:</strong>
+  </li>
+  <li><strong>Interrupted Mollweide (hemispheres):</strong>
+  </li>
+  <li><strong>Jacques Bertin's 1953 map:</strong> This quirky map highlights
+    the close proximity between North America and Asia when travelling
+    through the northern pole.
+  </li>
+  <li><strong>Natural Earch:</strong> This is probably the most familiar
+    projection of the bunch.
+  </li>
+  <li><strong>Polyhedral butterfly:</strong> Like the Dymaxion projection, this
+    projection can be cut out and folded up into a regular polygo, this time
+    with 8 faces.
+  </li>
+
+</ul>
+<section>
+  <% Map.projections_array.each do |name, d3| %>
+    <span>
+      <label for="<%= d3 %>"><%= name %></label>
+      <svg class="world-map simple" id="<%= d3 %>"
+      viewBox="-2 -2 400 200"preserveAspectRatio="xMidYMid meet"></svg>
+    </span>
+  <% end %>
+</section>
+
+
+<script>
+  d3.json("https://unpkg.com/world-atlas@1/world/110m.json", function(error, world) {
+    if (error) throw error;
+
+    var svgList = d3.selectAll('svg.world-map');
+
+    svgList.each( function() {
+      svg = d3.select(this);
+      drawMap(svg, world, false, false);
+      updateProjection(svg, d3[svg.attr('id')]());
+    })
+  });
+</script>
