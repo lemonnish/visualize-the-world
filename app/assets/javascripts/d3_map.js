@@ -36,8 +36,8 @@ function isInContent(id) {
 
 function updateProjection(inputSVG, projection) {
     viewBox = inputSVG.attr('viewBox').toString().split(' ');
-    width = +viewBox[2];
-    height = +viewBox[3];
+    width = +viewBox[2] - 4;
+    height = +viewBox[3] - 4;
 
     projection.fitSize([width, height], { type: "Sphere" });
 
