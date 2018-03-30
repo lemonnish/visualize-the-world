@@ -1,3 +1,5 @@
+<% provide(:interactive_map, false) %>
+
 <% if logged_in? %>
   <% provide(:class, "home login") %>
   <% if @maps.count != 0 %>

@@ -8,7 +8,7 @@ nav.projection {
   }
 }
 
-svg#world-map {
+svg.world-map {
   width: 100%;
   height: auto;
   display: block;
@@ -25,18 +25,26 @@ svg#world-map {
     stroke: $color-ocean-lines;
     stroke-width: .5px;
   }
-  .map-country {
-    fill: white;
-    stroke: none;
+
+  &:not(.simple) {
+    .map-country {
+      fill: white;
+      stroke: none;
+    }
+    .map-country:hover {
+      fill: $color-accent;
+    }
+    .map-content {
+      fill: $color-contrast;
+    }
+    .countrySelected {
+      fill: $color-accent-dark;
+    }
   }
-  .map-country:hover {
-    fill: $color-accent;
-  }
-  .map-content {
-    fill: $color-contrast;
-  }
-  .countrySelected {
-    fill: $color-accent-dark;
+  &.simple {
+    .map-borders, .map-outline {
+      stroke: darkgreen;
+    }
   }
 }
 #map-label {

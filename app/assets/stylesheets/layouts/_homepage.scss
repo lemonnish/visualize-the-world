@@ -65,14 +65,4 @@ main.home {
       }
     }
   }
-
-  svg#world-map {
-    .countrySelected {
-      fill: white;
-    }
-    .map-country:hover {
-      fill: $color-accent;
-    }
-  }
-
 }
