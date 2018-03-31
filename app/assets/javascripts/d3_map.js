@@ -3,19 +3,6 @@
 // this value needs to be defined within the page body
 var mapContents = [];
 
-function getRandomInt(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min)) + min;
-}
-
-function randomColor(numColors) {
-  var colorFunction = d3.scaleSequential(
-      d3.interpolateHcl(d3.hcl(150,90,50), d3.hcl(120,80,90)))
-    .domain([0, numColors]);
-  return colorFunction(getRandomInt(0, numColors));
-}
-
 function toggleDisplayedCountry(id) {
   var old_selected = d3.selectAll('.countrySelected');
   var new_selected = d3.selectAll('#label-country-' + id +
@@ -56,9 +43,10 @@ function drawMap(inputSVG, world,
     // borders = "country" / "land" / false
     // drawCountries = true (draw indiv countries) / false (draw land masses)
     //    - value is ignored if inputSVG doesn't have class ".simple"
-    var countries = topojson.feature(world, world.objects.countries);
+    var countries = topojson.feature(world, world.objects.countries).features;
+    var neighbors = topojson.neighbors(world.objects.countries.geometries);
     var countryBorders = topojson.mesh(world, world.objects.countries);
-    var land = topojson.feature(world, world.objects.land);
+    var land = topojson.feature(world, world.objects.land).features;
     var landBorders = topojson.mesh(world, world.objects.land);
 
     var clipName = inputSVG.attr('id') + "_clip";
@@ -66,6 +54,10 @@ function drawMap(inputSVG, world,
     var sphereID = "#" + sphereName
     var clipID = "#" + clipName
     var clipUrl = "url(#" + clipName + ")";
+
+    var color = d3.scaleSequential(
+        d3.interpolateHcl(d3.hcl(150,90,50), d3.hcl(120,80,90)))
+      .domain([0, 6]);
 
     var landGroup = inputSVG.select('g');
 
@@ -103,22 +95,23 @@ function drawMap(inputSVG, world,
     if (inputSVG.classed("simple")) { // draw non-interactive map
       if (drawCountries) { // draw countries, fill with a random color
         landGroup.selectAll('path.map-country')
-            .data(countries.features)
+            .data(countries)
           .enter().append("path")
             .classed("map-country", true)
             .attr("clip-path", clipUrl)
-            .attr("fill", function(d) { return randomColor(10); } );
+            .attr("fill", function(d, i) { return color(d.color =
+              d3.max(neighbors[i], function(n) { return countries[n].color; }) + 1 | 0); });
       } else {  // draw land
         landGroup.selectAll('path.map-land')
-            .data(land.features)
+            .data(land)
           .enter().append("path")
             .attr("class", "map-land")
             .attr("clip-path", clipUrl)
-            .attr("fill", d3.hcl(150,90,50));
+            .attr("fill", color(0));
       }
     } else {  // draw interactive countries
       landGroup.selectAll('path.map-country')
-          .data(countries.features)
+          .data(countries)
         .enter().append("path")
           .attr("clip-path", clipUrl)
           .classed("map-country", true)
