@@ -2,7 +2,7 @@
   viewBox="-2 -2 900 450" id="worldMap"
   preserveAspectRatio="xMidYMid meet"></svg>
 
-<nav class="projection">
+<nav class="projection" id="worldMapProjection">
   <%= label(:map, :projection, "Map projection:") %>
   <%= select(:map, :projection, Map.projections_array) %>
 </nav>
@@ -10,7 +10,7 @@
 <script>
 
   document.addEventListener('turbolinks:load',function() {
-    document.querySelector('select[name="map[projection]"]').onchange=reloadMap;
+    document.querySelector('nav#worldMapProjection').onchange=reloadMap;
   },false);
 
   function reloadMap(event) {
