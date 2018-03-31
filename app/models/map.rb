@@ -11,13 +11,13 @@ class Map < ApplicationRecord
 
   # returns an array of all valid projections
   def self.projections
-    { geoAirocean: "Buckminster Fuller: Dymaxion",
+    { geoAirocean: "Airocean",
       geoNaturalEarth1: "Natural Earth",
       geoPolyhedralButterfly: "Polyhedral butterfly",
       geoBertin1953: "Jacques Bertin: 1953",
-      geoConicEqualArea: "Conic equal-area",
-      geoInterruptedMollweide: "Interrupted Mollweide",
-      geoInterruptedMollweideHemispheres: "Interrupted Mollweide: hemispheres" }
+      geoConicEqualArea: "Albers conic equal-area",
+      geoMollweide: "Mollweide",
+      geoInterruptedMollweide: "Interrupted Mollweide" }
   end
 
   # convert the array of valid projection hashes to an array of arrays

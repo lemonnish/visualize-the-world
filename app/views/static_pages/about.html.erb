@@ -16,10 +16,12 @@
 </ol>
 <p>
   My name is Lauren Nishizaki, and you can see more of what I’m up to on my
-  personal website, <%= link_to "www.laurennishizaki.com", 'https://www.laurennishizaki.com' %>.
+  personal website,
+  <%= link_to "www.laurennishizaki.com", 'https://www.laurennishizaki.com' %>.
 </p>
 <p>
-  Source code for this project can be viewed on <%= link_to "Github", 'https://github.com/lemonnish/' %>.
+  Source code for this project can be viewed on
+  <%= link_to "Github", 'https://github.com/lemonnish/' %>.
 </p>
 <p>
   This project would not exist without Michael Hartl’s Ruby on Rails Tutorial
@@ -52,28 +54,35 @@
   nuanced understanding of our world's geography.
 </p>
 <ul>
-  <li><strong>Buckminster Fuller's Dymaxion:</strong> This projection can be folded up into
-    a 20-sided polygon. Because most of the cuts are located in the oceans, it
-    can be used to show just how close neighboring continents are.
-    The many cuts also minimize the distortion of large land masses.
+  <li><strong>Airocean:</strong> This projection was created by Buckminster
+    Fuller and Shoji Sadao in 1954. The map can be folded up into a 20-sided
+    polygon (icosahedron), and is often referred to as a Dymaxion map.
+    There is no correct orientation for viewing the map--the map distorts the
+    viewer's perception of up, down, and the cardinal directions. Instead, the
+    map depicts the world's continents as one nearly-contiguous land mass.
   </li>
-  <li><strong>Contic equal-area:</strong> Distances and shapes are distorted,
+  <li><strong>Polyhedral butterfly:</strong> Like the Dymaxion projection, this
+    projection can be cut out and folded up into a regular polygon, this time
+    with 8 faces.
+  </li>
+  <li><strong>Albers conic equal-area:</strong> Distances and shapes are distorted,
     but the overall area of all countries is preserved.
+    This projection is named after Heinrich C. Albers.
   </li>
-  <li><strong>Interrupted Mollweide:</strong>
+  <li><strong>Mollweide:</strong> This is an equal-area and pseudo-cyllindrical
+    map. It was published by Karl Brandan Mollweide in 1805.
   </li>
-  <li><strong>Interrupted Mollweide (hemispheres):</strong>
+  <li><strong>Interrupted Mollweide:</strong> This map was created by John Paul
+    Goode; he adapted from the Mollweide projection around 1916. It is also an
+    equal-area map, but the many interruptions (cuts) minimize shape distortion.
   </li>
   <li><strong>Jacques Bertin's 1953 map:</strong> This quirky map highlights
     the close proximity between North America and Asia when travelling
     through the northern pole.
   </li>
-  <li><strong>Natural Earch:</strong> This is probably the most familiar
-    projection of the bunch.
-  </li>
-  <li><strong>Polyhedral butterfly:</strong> Like the Dymaxion projection, this
-    projection can be cut out and folded up into a regular polygo, this time
-    with 8 faces.
+  <li><strong>Natural Earth:</strong> This is an attractive and familiar-looking
+    projection. It was designed by Tom Patterson and Nathaniel Vaughn Kelso in
+    2015 as a public-domain resource for cartographers.
   </li>
 
 </ul>
