@@ -100,7 +100,7 @@ function drawMap(inputSVG, world,
             .classed("map-country", true)
             .attr("clip-path", clipUrl)
             .attr("fill", function(d, i) { return color(d.color =
-              d3.max(neighbors[i], function(n) { return countries[n].color; }) + 1 | 0); });
+              d3.max(neighbors[i], function(n) { return countries[n].color; }) + 1 || 0); });
       } else {  // draw land
         landGroup.selectAll('path.map-land')
             .data(land)
