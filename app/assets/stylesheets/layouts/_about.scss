@@ -1,0 +1,34 @@
+main.about {
+
+  section {
+    display: flex;
+    flex-wrap: wrap;
+    height: auto;
+    justify-content: center;
+    align-items: flex-end;
+
+    &:nth-of-type(2n) {
+      flex-direction: row-reverse;
+    }
+    h3 {
+      width: 100%;
+    }
+    span {
+      display: block;
+      width: 220px;
+      flex-grow: 1;
+      min-width: 200px;
+      margin: $base-unit $base-unit / 2;
+      label {
+        width: 100%;
+        display: block;
+        text-align: center;
+        margin-bottom: $base-unit / 2;
+      }
+      svg {
+        margin: 0 auto;
+        max-width: 400px;
+      }
+    }
+  }
+}
