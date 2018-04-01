@@ -5,6 +5,8 @@ body {
     [main-start] repeat(4, minmax(0, $content-width/5)) $content-width/5
     [main-end] minmax($base-unit, 1fr) [full-end];
   grid-column-gap: 0;
+  min-height: 100vh;
+  grid-template-rows: auto 1fr auto;
 
   & > footer, & > header, & > div.development {
     display: grid;
