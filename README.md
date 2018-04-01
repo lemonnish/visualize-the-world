@@ -1,8 +1,9 @@
-# Travel Application, built with Ruby on Rails
+# Visualize the World, built with Ruby on Rails
 
-The live app will be hosted at: [map.laurennishizaki.com](map.laurennishizaki.com)
+The live app is hosted on Heroku:
+[https://visualize-the-world.herokuapp.com](https://visualize-the-world.herokuapp.com)
 
-This app allows a user to log in and generate maps, where each map can have selected countries and text tied to that selected country. Every map can be displayed using a variety of different map projections.
+This app allows a user to log in and generate maps, where each map can have selected countries and text tied to that selected country. Every map can be displayed using a variety of map projections.
 
 ## Project motivation
 
