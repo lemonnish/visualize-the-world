@@ -18,6 +18,12 @@ class StaticPagesControllerTest < ActionDispatch::IntegrationTest
     assert_select "title", full_title_t("About")
   end
 
+  test "should get privacy" do
+    get privacy_path
+    assert_response :success
+    assert_select "title", full_title_t("Privacy")
+  end
+
   test "should get example" do
     example_map = maps(:example)
     get example_path

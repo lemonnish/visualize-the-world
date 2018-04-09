@@ -1,0 +1,52 @@
+<% provide(:title, "Privacy") %>
+
+<h1>Privacy</h1>
+
+<h2>Personal information</h2>
+
+<p>
+  The only personal information stored by the app is your email address and any
+  information you enter as map content. Your account password is stored in the
+  database as a <code>bcrypt</code>-hashed value.
+</p>
+<p>
+  You will only receive two types of emails from this application:
+</p>
+
+<ol>
+  <li>an email asking you to verify your email address: this is sent immediately
+    after you create a new account</li>
+  <li>an email with a password reset link: this in sent if you fill out the
+    "forgot password" form when trying to log in</li>
+</ol>
+
+<h2>Deleting your information</h2>
+
+<p>
+  You can delete a map using your <%= link_to 'Manage my maps', maps_path %> page.
+  Clicking on a map's "delete" link will delete all of that map's information,
+  including selected countries, country-specific text, and any map settings and text.
+  Deleting a map removes all map data immediately and cannot be undone.
+</p>
+
+<p>
+  You can delete your account using the link at the bottom of your
+  <%= link_to 'Account Settings', user_path %> page. Clicking this link will
+  delete all user information, including your email, password, any maps
+  you may have generated, and all content added to those maps. Deleting your
+  account is effective immediately and cannot be undone.
+</p>
+
+<h2>Sharing maps</h2>
+
+<p>
+  By default, all your maps are viewable only by you when you are logged into
+  your account. However, you can choose to mark a map as publicly viewable, in
+  which case anyone who has a link to the map may view it. Only you may ever
+  edit a map that you own (and only while logged in).
+  Map ownership is non-transferable.
+</p>
+<p>
+  If you choose to make a map private, no one else but you may view it,
+  even if they posess a link to the map.
+</p>

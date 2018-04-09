@@ -9,6 +9,9 @@ class StaticPagesController < ApplicationController
   def about
   end
 
+  def privacy
+  end
+
   def example
     @map = Map.find_by(example_map: true)
     render 'maps/show' if !@map.nil?
