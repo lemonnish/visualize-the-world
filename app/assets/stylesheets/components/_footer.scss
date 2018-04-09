@@ -10,7 +10,7 @@ footer {
     margin: 0;
   }
   nav {
-    grid-column: 2 / span 2;
+    grid-column: 2 / span 3;
     display: block;
     a {
       @extend %color-box-link;
@@ -20,7 +20,7 @@ footer {
   }
   p {
     margin-top: $top-spacing;
-    grid-column: 4 / span 3;
+    grid-column: 5 / span 2;
     display: block;
     text-align: right;
     font-size: small;

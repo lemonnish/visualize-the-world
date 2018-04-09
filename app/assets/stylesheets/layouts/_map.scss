@@ -36,6 +36,11 @@ main.map-show {
       }
     }
   }
+  > a {
+    display: block;
+    width: max-content;
+    margin: $base-unit 0;
+  }
 }
 
 main.map-edit {
@@ -69,6 +74,11 @@ main.map-edit {
       grid-row: 1 / span 2;
       height: inherit;
     }
+  }
+  > a {
+    display: block;
+    width: max-content;
+    margin: $base-unit * 2 0 0;
   }
 }
 
