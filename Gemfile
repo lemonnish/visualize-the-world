@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+ruby '2.7.0'
 gem 'rails',        '~> 5.2.0'
 gem 'bcrypt',       '3.1.13'
 gem 'countries',    '3.0.1'
