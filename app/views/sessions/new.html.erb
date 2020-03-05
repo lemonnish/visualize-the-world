@@ -9,8 +9,8 @@
 
   <section>
     <%= f.label :password %>
-    <span>(<%= link_to "forgot password", new_password_reset_path %>)</span>
     <%= f.password_field :password, class: 'form-control' %>
+    <span>(<%= link_to "forgot password", new_password_reset_path %>)</span>
   </section>
 
   <%= f.submit "Log in" %>
