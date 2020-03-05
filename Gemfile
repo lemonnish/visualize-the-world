@@ -1,32 +1,33 @@
 source 'https://rubygems.org'
 
-gem 'rails',        '5.1.2'
-gem 'bcrypt',       '3.1.11'
-gem 'countries',    '2.1.4'
-gem 'puma',         '3.9.1'
-gem 'sass-rails',   '5.0.6'
-gem 'uglifier',     '3.2.0'
-gem 'coffee-rails', '4.2.2'
-gem 'jquery-rails', '4.3.1'
-gem 'jbuilder',     '2.7.0'
+gem 'rails',        '~> 5.2.0'
+gem 'bcrypt',       '3.1.13'
+gem 'countries',    '3.0.1'
+gem 'puma',         '4.3.3'
+gem 'sass-rails',   '6.0.0'
+gem 'uglifier',     '4.2.0'
+gem 'coffee-rails', '5.0.0'
+gem 'jquery-rails', '4.3.5'
+gem 'jbuilder',     '2.10.0'
+gem 'bootsnap',     '1.4.6'
 
 group :development, :test do
-  gem 'sqlite3', '1.3.13'
-  gem 'byebug',  '9.0.6', platform: :mri
+  gem 'sqlite3', '1.4.2'
+  gem 'byebug',  '11.1.1', platform: :mri
 end
 
 group :development do
-  gem 'web-console',           '3.5.1'
-  gem 'listen',                '3.1.5'
-  gem 'spring',                '2.0.2'
+  gem 'web-console',           '>= 3.5.1'
+  gem 'listen',                '3.2.1'
+  gem 'spring',                '2.1.0'
   gem 'spring-watcher-listen', '2.0.1'
 end
 
 group :test do
-  gem 'rails-controller-testing', '1.0.2'
-  gem 'minitest-reporters',       '1.1.14'
-  gem 'guard',                    '2.13.0'
-  gem 'guard-minitest',           '2.4.4'
+  gem 'rails-controller-testing', '1.0.4'
+  gem 'minitest-reporters',       '1.4.2'
+  gem 'guard',                    '2.16.1'
+  gem 'guard-minitest',           '2.4.6'
 end
 
 group :production do

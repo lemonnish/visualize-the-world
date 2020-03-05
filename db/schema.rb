@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180326235452) do
+ActiveRecord::Schema.define(version: 2018_03_26_235452) do
 
   create_table "map_contents", force: :cascade do |t|
     t.string "country_code"
